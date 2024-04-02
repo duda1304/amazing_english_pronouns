@@ -1,3 +1,5 @@
+$(document).ready(function () {
+
 function setImage() {
 		const images = document.querySelectorAll("container-right img");
 		images.forEach((element) => {
@@ -12,6 +14,15 @@ function setImage() {
 				element.height = "60%";
 			}
 		});
-	}
-
+}
 setImage();
+
+$('button:contains("activities")').on('click', function() {
+	window.location.href = 'landing_page.html';
+});
+
+$('.card-landing').on('click', function(index, element) {
+	window.location.href = `activity${$(this).data('activity')}.html`;
+});
+
+});
