@@ -49,24 +49,23 @@ $(document).ready(function () {
     function renderProposedAnswers(selector, allAnswers, correctAnswer) {
         const count = $(selector).length;
         const proposedAnswers = createPossibleAnswers(allAnswers, correctAnswer, count);
-        return proposedAnswers;
         $(selector).each(function(){
             $(this).text(proposedAnswers.shift().toUpperCase());
         })
     }
 
-    function storeCurrentStatus() {
-        localStorage.setItem('images', images);
-        localStorage.setItem('proposedAnswers', images);
-    }
+    // function storeCurrentStatus() {
+    //     localStorage.setItem('images', images);
+    //     localStorage.setItem('proposedAnswers', images);
+    // }
 
     const images = imageFileNames(pronouns, number_of_images);
-    let proposedAnswers = [];
+    // let proposedAnswers = [];
 
-    images.forEach(image => {
-        const correctAnswer = image.split('_')[0];
-        proposedAnswers.push(renderProposedAnswers('figure>div>div', pronouns, correctAnswer));
-    });
+    // images.forEach(image => {
+    //     const correctAnswer = image.split('_')[0];
+    //     proposedAnswers.push(renderProposedAnswers('figure>div>div', pronouns, correctAnswer));
+    // });
 
     const randomElement = pickAndRemoveRandomElement(images);
     const correctAnswer = randomElement.split('_')[0];
@@ -74,17 +73,6 @@ $(document).ready(function () {
     renderProposedAnswers('figure>div>div', pronouns, correctAnswer);
    
     $('button:contains("next")').on('click', function() {
-        if (images.length > 0) {
-            const randomElement = pickAndRemoveRandomElement(images);
-            const correctAnswer = randomElement.split('_')[0];
-            document.querySelector('.card2').src = `media/1_1/${randomElement}`;
-            renderProposedAnswers('figure>div>div', pronouns, correctAnswer);
-        } else {
-            $(this).attr('disabled', true);
-        }
-    });
-
-    $('button:contains("previous")').on('click', function() {
         if (images.length > 0) {
             const randomElement = pickAndRemoveRandomElement(images);
             const correctAnswer = randomElement.split('_')[0];
