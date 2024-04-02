@@ -162,14 +162,46 @@ figure {
   justify-content: center;
 }
 
+/* activity 04  */
+.btn-clear-blue,
+.btn-clear-blue:hover {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: bold;
+  color: #524961;
+  border-radius: 6px;
+  border: 1.5px solid #5A9DE9;
+  font-size: max(min(1.2vw, 15px), 10px);
+  padding: 0.75rem 0.5rem;
+  display: flex;
+  justify-content: center;
+  max-width: 100px;
+}
+
+.activity4-3to6 {
+  background-color: red;
+  height: 20vh;
+  margin-top: 2rem;
+}
+
+.activity4-3to6 img {
+  /* max-height: 100%; */
+  /* max-width: 100%; */
+  /* height: 80%; */
+  width: auto;
+}
+
+.form-control {
+  width: 100px;
+  margin: auto;
+  margin-top: 1rem;
+}
+
 /* buttons navigation */
 .btn-blue,
 .btn-blue:hover {
   background-color: #5A9DE9;
   color: white;
   font-weight: bold;
-  /* font-size: max(min(1vw, 24px), 14px); */
-  /* max will be 18px, min 12 px all in between is dependent on vw */
   font-size: max(min(1.3vw, 18px), 12px);
   border: 1.5px solid white;
   border-radius: 3px;
