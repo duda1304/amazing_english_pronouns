@@ -1,17 +1,21 @@
 $(document).ready(function () {
 
 function setImage() {
-		const images = document.querySelectorAll("container-right img");
+		const images = document.querySelectorAll(".container-right img");
 		images.forEach((element) => {
 			const width = element.naturalWidth;
 			const height = element.naturalHeight;
 
 			if (height > width) {
-				element.height = "80%";
+				element.style.height = "90%";
 			} else if (height === width) {
-				element.height = "40%";
+				element.style.height = "40%";
 			} else {
-				element.height = "60%";
+				if (width/height >= 1.8) {
+					element.style.height = "60%";
+				} else {
+					element.style.height = "80%";
+				}
 			}
 		});
 }

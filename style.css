@@ -72,6 +72,7 @@ X
 }
 
 /* activity 01 */
+
 #content-activity {
   font-family: 'Open Sans', sans-serif;
   background-image: url("./media/activity_background.svg");
@@ -150,6 +151,10 @@ figure {
   width: 80%;
 }
 
+#proposed_answers div {
+  text-transform: uppercase;
+}
+
 .btn-white,
 .btn-white:hover {
   border-radius: 6px;
@@ -160,6 +165,10 @@ figure {
   /* padding: 1em 3em 1em 3em; */
   display: flex;
   justify-content: center;
+}
+
+.modal-dialog {
+  width: fit-content;
 }
 
 /* activity 04  */
@@ -181,6 +190,7 @@ figure {
   background-color: red;
   height: 20vh;
   margin-top: 2rem;
+  width: 100%;
 }
 
 .activity4-3to6 img {

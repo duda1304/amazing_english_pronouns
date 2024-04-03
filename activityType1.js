@@ -50,38 +50,77 @@ $(document).ready(function () {
         const count = $(selector).length;
         const proposedAnswers = createPossibleAnswers(allAnswers, correctAnswer, count);
         $(selector).each(function(){
-            $(this).text(proposedAnswers.shift().toUpperCase());
+            $(this).text(proposedAnswers.shift());
         })
     }
+   
+    function render() {
+        randomElement = pickAndRemoveRandomElement(images);
+        correctAnswer = randomElement.split('_')[0];
+        document.querySelector('.card2').src = `media/1_1/${randomElement}`;
+        renderProposedAnswers('#proposed_answers>div', pronouns, correctAnswer);
+    }
 
-    // function storeCurrentStatus() {
-    //     localStorage.setItem('images', images);
-    //     localStorage.setItem('proposedAnswers', images);
-    // }
+    function showMessage(message) {
+        $('.modal-body').text(message);
+        $('.modal').modal('show');
+    }
+
+    function hideMessage() {
+        $('.modal').modal('hide');
+    }
 
     const images = imageFileNames(pronouns, number_of_images);
-    // let proposedAnswers = [];
+    let tryCount = 0;
+    let randomElement;
+    let correctAnswer;
 
-    // images.forEach(image => {
-    //     const correctAnswer = image.split('_')[0];
-    //     proposedAnswers.push(renderProposedAnswers('figure>div>div', pronouns, correctAnswer));
-    // });
-
-    const randomElement = pickAndRemoveRandomElement(images);
-    const correctAnswer = randomElement.split('_')[0];
-    document.querySelector('.card2').src = `media/1_1/${randomElement}`;
-    renderProposedAnswers('figure>div>div', pronouns, correctAnswer);
+    render();
    
+    $('#proposed_answers>div').on('click', function() {
+        tryCount += 1;
+        if ($(this).text().toLowerCase() === correctAnswer) {
+            $(this).css('background-color', 'green');
+            if (images.length > 0) {
+                setTimeout(() => {
+                    tryCount = 0;
+                    $(this).css('background-color', '');
+                    render();
+                }, 1000);
+            }
+        } else {
+            if (tryCount < 2) {
+                $(this).css('background-color', 'red');
+                showMessage('Please try again');
+                setTimeout(() => {
+                    hideMessage();
+                    $(this).css('background-color', '');
+                }, 1000);
+            } else {
+                $(`#proposed_answers>div:contains("${correctAnswer}")`).css('background-color', 'green');
+                if (images.length > 0) {
+                    setTimeout(() => {
+                        tryCount = 0;
+                        $(`#proposed_answers>div:contains("${correctAnswer}")`).css('background-color', '');
+                        render();
+                    }, 1000);
+                }
+            }
+        }
+    });
+
     $('button:contains("next")').on('click', function() {
         if (images.length > 0) {
-            const randomElement = pickAndRemoveRandomElement(images);
-            const correctAnswer = randomElement.split('_')[0];
+            randomElement = pickAndRemoveRandomElement(images);
+            correctAnswer = randomElement.split('_')[0];
             document.querySelector('.card2').src = `media/1_1/${randomElement}`;
-            renderProposedAnswers('figure>div>div', pronouns, correctAnswer);
+            renderProposedAnswers('#proposed_answers>div', pronouns, correctAnswer);
         } else {
             $(this).attr('disabled', true);
         }
     });
+
+
 });
 
 
