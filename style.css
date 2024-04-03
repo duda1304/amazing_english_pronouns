@@ -204,6 +204,11 @@ figure {
   width: 100px;
   margin: auto;
   margin-top: 1rem;
+  text-align: center;
+}
+
+.form-control:disabled {
+  background-color: white !important;
 }
 
 /* buttons navigation */

@@ -121,19 +121,37 @@ $(document).ready(function () {
     //         }
     //     }
     // });
+    
+    function generateRandomString(length) {
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let result = '';
+        for (let i = 0; i < length; i++) {
+            result += characters.charAt(Math.floor(Math.random() * characters.length));
+        }
+        return result;
+    }
 
-    // $('button:contains("next")').on('click', function() {
-    //     if (images.length > 0) {
-    //         randomElement = pickAndRemoveRandomElement(images);
-    //         correctAnswer = randomElement.split('_')[0];
-    //         document.querySelector('.card2').src = `media/1_1/${randomElement}`;
-    //         renderProposedAnswers('#proposed_answers>div', pronouns, correctAnswer);
-    //     } else {
-    //         $(this).attr('disabled', true);
-    //     }
-    // });
+    $('.container-right input').on('dragover', function(event) {
+        event.preventDefault();
+    });
+    
+    $('#proposed_answers div').attr('draggable', 'true');
+    
+    $('#proposed_answers div').on('dragstart', function(event) {
+        event.originalEvent.dataTransfer.setData("text", $(this).text().toUpperCase()); 
+        const identifier = generateRandomString(10);
+        $(this).data('identifier', identifier);
+        event.originalEvent.dataTransfer.setData("identifier", identifier);
+    });
+    
+    $('.container-right input').on('drop', function(event) {
+        event.preventDefault();
+        const data = event.originalEvent.dataTransfer.getData("text");
+        event.target.value = data;
 
-
+        const identifier = event.originalEvent.dataTransfer.getData("identifier");
+        // Find the element using the custom data attribute and remove it
+        $(`[data-identifier="${identifier}"]`).remove();
+    });
+   
 });
-
-
