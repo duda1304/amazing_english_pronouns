@@ -76,9 +76,17 @@ X
   width: 10vw;
   border-radius: 5px;
     height: 13vw;
-    background-image: url('./media/memory-backside.svg');
+    background-image: url('./media/memory-backside.png');
     background-size: contain;
     background-repeat: no-repeat;
+    object-fit: contain;
+    display: flex;
+    justify-content: center;
+}
+
+.memory-game-image {
+  height: 60%;
+  margin-top: 20%;
 }
 
 /* activity 01 */
@@ -188,6 +196,7 @@ figure {
 
 .modal-dialog {
   width: fit-content;
+  width: -moz-fit-content;
 }
 
 .correct {

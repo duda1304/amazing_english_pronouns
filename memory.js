@@ -32,7 +32,7 @@ $(document).ready(function () {
 	const all_images = imageFileNames(pronouns, number_of_images);
 	const images =[];
 
-	count = 0;
+	count = 1;
 	while (count <= 9) {
 		const randomElement = pickAndRemoveRandomElement(all_images);
 		images.push(randomElement);
@@ -47,7 +47,7 @@ $(document).ready(function () {
 	function createMemoryCard(index) {
 		return (`<div class="col-md-2">
 					<div class="memory-card card-image" data-index="${index}">
-						<img src="" class="memory-game-image" alt="Memory Card"></img>
+						<img src="" class="memory-game-image"></img>
 					</div>
 				</div>`);
 	}

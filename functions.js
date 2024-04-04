@@ -32,5 +32,27 @@ $(window).on('load', function() {
 			}
 		});
 	}
+
 	setImage();
+
+	function setMemoryImages() {
+		const images = document.querySelectorAll(".memory-container img");
+
+		images.forEach((element) => {
+			const image_width = $(element).width();
+			const card_width = $(element).parent().width();
+
+			// const height = element.naturalHeight;
+
+			const ratio = image_width/card_width;
+			if (ratio > 0.8) {
+				$(element).width(0.8*card_width);
+				$(element).height('auto');
+			} 
+		});
+	}
+
+	setMemoryImages();
 });
+
+// 
