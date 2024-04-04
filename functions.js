@@ -18,7 +18,8 @@ $(window).on('load', function() {
 			const width = element.naturalWidth;
 			const height = element.naturalHeight;
 
-			if (height > width) {
+			const ration = height/width;
+			if (height/width >= 1.5) {
 				element.style.height = "90%";
 			} else if (height === width) {
 				element.style.height = "40%";

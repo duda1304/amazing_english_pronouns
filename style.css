@@ -180,6 +180,24 @@ figure {
   width: fit-content;
 }
 
+.correct {
+  border-radius: 6px;
+  border: 1.5px solid #639454;
+  font-size: max(min(1.5vw, 20px), 14px);
+  background: #80BF6C;
+  display: flex;
+  justify-content: center;
+}
+
+.incorrect {
+  border-radius: 6px;
+  border: 1.5px solid #C1393B;
+  font-size: max(min(1.5vw, 20px), 14px);
+  background: #E04245;
+  display: flex;
+  justify-content: center;
+}
+
 /* activity 04  */
 .btn-clear-blue,
 .btn-clear-blue:hover {
@@ -192,13 +210,14 @@ figure {
   padding: 0.75rem 0.5rem;
   display: flex;
   justify-content: center;
-  max-width: 100px;
+  /* max-width: 100px; */
+  width: 75px;
 }
 
 .activity4-3to6 {
   background-color: #D8EFF9;
   border: 2px solid #5A9DE9;
-  border-radius: 20px;
+  border-radius: 10px;
   height: 20vh;
   margin-top: 2rem;
   width: 100%;
@@ -212,7 +231,8 @@ figure {
 }
 
 .form-control {
-  width: 100px;
+  /* width: 100px; */
+  width: 75px;
   margin: auto;
   margin-top: 1rem;
   text-align: center;

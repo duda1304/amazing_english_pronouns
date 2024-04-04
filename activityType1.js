@@ -57,7 +57,7 @@ $(document).ready(function () {
     function render() {
         randomElement = pickAndRemoveRandomElement(images);
         correctAnswer = randomElement.split('_')[0];
-        document.querySelector('.card2').src = `media/1_1/${randomElement}`;
+        document.querySelector('.container-right img').src = `media/1_1/${randomElement}`;
         renderProposedAnswers('#proposed_answers>div', pronouns, correctAnswer);
     }
 

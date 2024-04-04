@@ -141,7 +141,10 @@ $(document).ready(function () {
         event.originalEvent.dataTransfer.setData("text", $(this).text().toUpperCase()); 
         const identifier = generateRandomString(10);
         $(this).data('identifier', identifier);
+        console.log($(this).data());
         event.originalEvent.dataTransfer.setData("identifier", identifier);
+        console.log(identifier);
+        
     });
     
     $('.container-right input').on('drop', function(event) {
@@ -150,6 +153,7 @@ $(document).ready(function () {
         event.target.value = data;
 
         const identifier = event.originalEvent.dataTransfer.getData("identifier");
+        console.log(identifier);
         // Find the element using the custom data attribute and remove it
         $(`[data-identifier="${identifier}"]`).remove();
     });
