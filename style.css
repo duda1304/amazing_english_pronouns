@@ -60,8 +60,13 @@ X
   margin: 5vh;
 }
 
+.memory-container > div {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 .memory-card {
-  margin: 10px;
+  /* margin: 10px; */
   cursor: pointer;
   gap: 20px;
 }
@@ -69,6 +74,11 @@ X
 .card-image {
   height: auto;
   width: 10vw;
+  border-radius: 5px;
+    height: 13vw;
+    background-image: url('./media/memory-backside.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 /* activity 01 */

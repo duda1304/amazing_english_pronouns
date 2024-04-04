@@ -2,48 +2,56 @@
 // eslint-disable-next-line no-undef
 
 $(document).ready(function () {
-	const images = [
-		"./media/memory-I.svg",
-		"./media/memory-I.svg",
-		"./media/memory-I.svg",
-		"./media/memory-I.svg",
-		"./media/memory-I.svg",
-		"./media/memory-I.svg",
-		"./media/memory-I.svg",
-		"./media/memory-I.svg",
-		"./media/memory-I.svg",
-		"./media/memory-je.svg",
-		"./media/memory-je.svg",
-		"./media/memory-je.svg",
-		"./media/memory-je.svg",
-		"./media/memory-je.svg",
-		"./media/memory-je.svg",
-		"./media/memory-je.svg",
-		"./media/memory-je.svg",
-		"./media/memory-je.svg",
-	];
+	const pronouns = ['i', 'you', 'he', 'she', 'it', 'we', 'they'];
+    const number_of_images = {
+        'i' : 3,
+        'you' : 6,
+        'he' : 3,
+        'she' : 3,
+        'it' : 3,
+        'we' : 3,
+        'they' : 6
+    };
 
-	const pairs = {
-		"./media/memory-I.svg": "./media/memory-je.svg",
-		"./media/memory-je.svg": "./media/memory-I.svg",
-	};
+	function imageFileNames(pronouns, number_of_images) {
+        let fileNames = [];
+        pronouns.forEach(element => {
+            for (let i = 1; i <= number_of_images[element]; i++) {
+                fileNames.push(`${element}_${i}.png`);
+            }
+        });
+        return fileNames;
+    }    
+
+	function pickAndRemoveRandomElement(arr) {
+        const randomIndex = Math.floor(Math.random() * arr.length);
+        const removedElement = arr.splice(randomIndex, 1)[0];
+        return removedElement;
+    };
+
+	const all_images = imageFileNames(pronouns, number_of_images);
+	const images =[];
+
+	count = 0;
+	while (count <= 9) {
+		const randomElement = pickAndRemoveRandomElement(all_images);
+		images.push(randomElement);
+		images.push(randomElement);
+		count += 1;
+	}
 
 	const $memoryContainer = $(".memory-container");
 	let flippedCount = 0;
 	let flippedCards = [];
 
 	function createMemoryCard(index) {
-		return (
-			'<div class="col-md-2">' +
-			'<div class="memory-card" data-index="' +
-			index +
-			'">' +
-			'<img src="./media/memory-backside.svg" alt="Memory Card" class="card-image">' +
-			"</div>" +
-			"</div>"
-		);
+		return (`<div class="col-md-2">
+					<div class="memory-card card-image" data-index="${index}">
+						<img src="" class="memory-game-image" alt="Memory Card"></img>
+					</div>
+				</div>`);
 	}
-
+	
 	function renderMemoryCards() {
 		images.forEach(function (_, index) {
 			let memoryCardHTML = createMemoryCard(index);
@@ -58,9 +66,10 @@ $(document).ready(function () {
 	}
 
 	function flipCard($card, index) {
-		$card.html(
-			'<img src="' + images[index] + '" alt="Memory Card" class="card-image">'
-		);
+		$card.css('background-image', "url('./media/memory-front.png')");
+		// $card.find('img[src*="backside"]').hide();
+		// $card.find('img[src*="front"]').show();
+		$card.find('.memory-game-image').attr('src', `./media/1_1/${images[index]}`);
 		$card.addClass("flipped");
 		flippedCount++;
 		flippedCards.push($card);
@@ -68,9 +77,13 @@ $(document).ready(function () {
 
 	function resetFlippedCards() {
 		flippedCards.forEach(function (card) {
-			card.html(
-				'<img src="./media/memory-backside.svg" alt="Memory Card" class="card-image">'
-			);
+			card.find('.memory-game-image').attr('src', '');
+			card.css('background-image', "url('./media/memory-backside.png')");
+			// card.find('img[src*="backside"]').show();
+			// card.find('img[src*="front"]').hide();
+			// card.html(
+			// 	'<img src="./media/memory-backside.png" alt="Memory Card" class="card-image">'
+			// );
 			card.removeClass("flipped");
 		});
 		flippedCards = [];
@@ -80,12 +93,10 @@ $(document).ready(function () {
 		if (flippedCount === 2) {
 			const card1 = flippedCards[0];
 			const card2 = flippedCards[1];
-			const index1 = card1.data("index");
-			const index2 = card2.data("index");
-			const pair1 = images[index1];
-			const pair2 = images[index2];
-
-			if (pairs[pair1] === pair2 || pairs[pair2] === pair1) {
+			const image1 = $(card1).find('.memory-game-image').attr('src');
+			const image2 = $(card2).find('.memory-game-image').attr('src');
+			
+			if (image1 === image2) {
 				flippedCards = [];
 			} else {
 				$memoryContainer.addClass("checking");
