@@ -75,13 +75,13 @@ X
   height: auto;
   width: 10vw;
   border-radius: 5px;
-    height: 13vw;
-    background-image: url('./media/memory-backside.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    object-fit: contain;
-    display: flex;
-    justify-content: center;
+  height: 13vw;
+  background-image: url('./media/memory-backside.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  object-fit: contain;
+  display: flex;
+  justify-content: center;
 }
 
 .memory-game-image {
@@ -196,8 +196,8 @@ figure {
 }
 
 .modal-dialog {
-  width: fit-content;
   width: -moz-fit-content;
+  width: fit-content;
 }
 
 .correct {
@@ -264,6 +264,11 @@ figure {
 }
 
 /* activity 3 (7 to 9 ) */
+
+.activity379>div>div {
+  margin-top: 0rem;
+}
+
 .btn-379,
 .btn-379:hover,
 .btn-379:active {
@@ -318,7 +323,7 @@ figure {
   padding: 0.75rem 0.5rem;
   display: flex;
   justify-content: center;
-  width: 100px;
+  width: 100%;
 }
 
 .volume-blue {
@@ -327,10 +332,12 @@ figure {
 
 .english-479 {
   font-weight: bold;
+  font-size: max(min(1.6vw, 20px), 14px);
 }
 
 .french-479 {
   font-style: italic;
+  font-size: max(min(1.4vw, 18px), 12px);
 }
 
 /* buttons navigation */
