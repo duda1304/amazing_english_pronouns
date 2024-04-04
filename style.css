@@ -82,11 +82,16 @@ X
     object-fit: contain;
     display: flex;
     justify-content: center;
+    padding-bottom: 25%;
+    align-items: center;
+    padding-left: 8%;
+    padding-right: 8%;
 }
 
 .memory-game-image {
-  height: 60%;
+  height: 70%;
   margin-top: 20%;
+  object-fit: contain;
 }
 
 /* activity 01 */
@@ -238,6 +243,7 @@ figure {
   border: 2px solid #5A9DE9;
   border-radius: 10px;
   height: 20vh;
+  min-height: 125px;
   margin-top: 2rem;
   width: 100%;
 }
@@ -258,7 +264,7 @@ figure {
 }
 
 .form-control:disabled {
-  background-color: white !important;
+  background-color: white;
 }
 
 /* buttons navigation */

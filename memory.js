@@ -45,7 +45,7 @@ $(document).ready(function () {
 	let flippedCards = [];
 
 	function createMemoryCard(index) {
-		return (`<div class="col-md-2">
+		return (`<div class="col-2">
 					<div class="memory-card card-image" data-index="${index}">
 						<img src="" class="memory-game-image"></img>
 					</div>
@@ -70,6 +70,24 @@ $(document).ready(function () {
 		// $card.find('img[src*="backside"]').hide();
 		// $card.find('img[src*="front"]').show();
 		$card.find('.memory-game-image').attr('src', `./media/1_1/${images[index]}`);
+
+		// $card.find('.memory-game-image').on('load', function() {
+		// 	const image_width = $(this).width();
+		// 	const image_height = $(this).height();
+		
+		// 	const card_width = $(this).parent().width();
+		// 	const card_height = $(this).parent().height();
+		
+		// 	const image_width_ratio = image_width/image_height;
+		
+		// 	const adjusted_height = 0.6*card_height;
+		
+		// 	if ((image_width/image_height)*adjusted_height > 0.8*card_width) {
+		// 		$(this).width(0.9*card_width);
+		// 		$(this).height((image_height/image_width)*0.8*card_width);
+		// 	} 
+		// })
+		
 		$card.addClass("flipped");
 		flippedCount++;
 		flippedCards.push($card);
@@ -103,7 +121,7 @@ $(document).ready(function () {
 				setTimeout(function () {
 					resetFlippedCards();
 					$memoryContainer.removeClass("checking");
-				}, 1000);
+				}, 500);
 			}
 			flippedCount = 0;
 		}
