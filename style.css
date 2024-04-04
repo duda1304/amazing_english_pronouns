@@ -60,7 +60,7 @@ X
   margin: 5vh;
 }
 
-.memory-container > div {
+.memory-container>div {
   margin-top: 10px;
   margin-bottom: 10px;
 }
@@ -75,13 +75,13 @@ X
   height: auto;
   width: 10vw;
   border-radius: 5px;
-    height: 13vw;
-    background-image: url('./media/memory-backside.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    object-fit: contain;
-    display: flex;
-    justify-content: center;
+  height: 13vw;
+  background-image: url('./media/memory-backside.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  object-fit: contain;
+  display: flex;
+  justify-content: center;
 }
 
 .memory-game-image {
@@ -168,7 +168,7 @@ X
   font-size: max(min(1.4vw, 18px), 12px);
   font-style: italic;
   font-weight: 400;
-  line-height: 15px;
+  line-height: 20px;
 }
 
 figure {
@@ -259,6 +259,76 @@ figure {
 
 .form-control:disabled {
   background-color: white !important;
+}
+
+/* activity 3 (7 to 9 ) */
+.btn-379,
+.btn-379:hover,
+.btn-379:active {
+  font-family: 'Open Sans', sans-serif;
+  color: #524961;
+  background-color: white;
+  border-radius: 6px;
+  border-width: 1.5px;
+  border-style: solid;
+  font-size: max(min(1.2vw, 15px), 10px);
+  padding: 0.75rem 0.5rem;
+  display: flex;
+  justify-content: center;
+  width: 100px;
+}
+
+.btn-white-blue,
+.btn-white-blue:hover,
+.btn-white-blue:active {
+  border-color: #5A9DE9;
+}
+
+.btn-white-red,
+.btn-white-red:hover,
+.btn-white-red:active {
+  border-color: #FF7E0B;
+}
+
+.btn-white-green,
+.btn-white-green:hover,
+.btn-white-green:active {
+  border-color: #88DD7B;
+}
+
+.secret-code {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* activity 4 (7 to 9 ) */
+.btn-479,
+.btn-479:hover,
+.btn-479:active {
+  font-family: 'Open Sans', sans-serif;
+  color: #524961;
+  background-color: white;
+  border-radius: 6px;
+  border-width: 1.5px;
+  border-style: solid;
+  font-size: max(min(1.2vw, 15px), 10px);
+  padding: 0.75rem 0.5rem;
+  display: flex;
+  justify-content: center;
+  width: 100px;
+}
+
+.volume-blue {
+  color: #5A9DE9;
+}
+
+.english-479 {
+  font-weight: bold;
+}
+
+.french-479 {
+  font-style: italic;
 }
 
 /* buttons navigation */
