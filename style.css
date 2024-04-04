@@ -115,6 +115,15 @@ X
   max-width: 250px; */
 }
 
+.activity1-3to6 {
+  background-color: #D8EFF9;
+  border: 2px solid #5A9DE9;
+  border-radius: 20px;
+  height: 20vh;
+  margin-top: 2rem;
+  width: auto;
+}
+
 .container-right {
   float: right;
   width: 60%;
@@ -187,7 +196,9 @@ figure {
 }
 
 .activity4-3to6 {
-  background-color: red;
+  background-color: #D8EFF9;
+  border: 2px solid #5A9DE9;
+  border-radius: 20px;
   height: 20vh;
   margin-top: 2rem;
   width: 100%;
