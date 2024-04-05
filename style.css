@@ -340,6 +340,17 @@ figure {
   font-size: max(min(1.4vw, 18px), 12px);
 }
 
+/* activity 3 (10 -12) */
+
+.english-31012 {
+  font-size: max(min(1.2vw, 10px), 10px);
+}
+
+.french-31012 {
+  font-size: max(min(1.2vw, 10px), 10px);
+
+}
+
 /* buttons navigation */
 .btn-blue,
 .btn-blue:hover {
