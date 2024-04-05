@@ -4,23 +4,24 @@
 $(document).ready(function () {
 	const pronouns = ['i', 'you', 'he', 'she', 'it', 'we', 'they'];
     const number_of_images = {
-        'i' : 3,
-        'you' : 6,
-        'he' : 3,
-        'she' : 3,
-        'it' : 3,
-        'we' : 3,
-        'they' : 6
+        'i' : 1,
+        'you' : 2,
+        'he' : 1,
+        'she' : 1,
+        'it' : 1,
+        'we' : 1,
+        'they' : 2
     };
 	const french_pronouns = {
-		'i' : 'je',
-		'you' : 'tu',
-		'he' : 'il',
-		'she' : 'elle',
-		'it' : 'elle',
-		'we' : 'nous',
-		'You' : 'vous',
-		'they' : 'ils/elles'
+		'i_1' : 'je',
+		'you_1' : 'tu',
+		'he_1' : 'il',
+		'she_1' : 'elle',
+		'it_1' : 'elle',
+		'we_1' : 'nous',
+		'you_2' : 'vous',
+		'they_1' : 'ils',
+		'they_2' : 'elles'
 	}
 
 	function imageFileNames(pronouns, number_of_images) {
@@ -46,10 +47,7 @@ $(document).ready(function () {
 	while (count <= 9) {
 		const randomElement = pickAndRemoveRandomElement(all_images);
 		images.push({'src' : randomElement, 'text' : randomElement.split('_')[0]});
-		let french_word = french_pronouns[randomElement.split('_')[0]];
-		if (randomElement.includes('you_1') || randomElement.includes('you_2') || randomElement.includes('you_6')) {
-			french_word = french_pronouns['You'];
-		}
+		let french_word = french_pronouns[randomElement.split('.')[0]];
 		images.push({'src' : randomElement, 'text' : french_word});
 		count += 1;
 	}
@@ -82,25 +80,25 @@ $(document).ready(function () {
 
 	function flipCard($card, index) {
 		$card.css('background-image', "url('./media/memory-front.png')");
-		$card.find('.memory-game-image').attr('src', `./media/1_1/${images[index]['src']}`);
+		$card.find('.memory-game-image').attr('src', `./media/1_2/${images[index]['src']}`);
 		$card.find('p').text(images[index]['text']);
-		$card.find('.memory-game-image').on('load', function() {
-			const image_width = $(this).width();
-			const image_height = $(this).height();
+		// $card.find('.memory-game-image').on('load', function() {
+		// 	const image_width = $(this).width();
+		// 	const image_height = $(this).height();
 		
-			const card_width = $(this).parent().width();
-			const card_height = $(this).parent().height();
+		// 	const card_width = $(this).parent().width();
+		// 	const card_height = $(this).parent().height();
 		
-			const image_width_ratio = image_width/image_height;
-			const image_height_ratio = card_height/card_width;
+		// 	const image_width_ratio = image_width/image_height;
+		// 	const image_height_ratio = card_height/card_width;
 
-			const adjusted_height = 0.7*card_height;
+		// 	const adjusted_height = 0.7*card_height;
 		
-			if (image_width_ratio*adjusted_height > 0.8*card_width) {
-				$(this).width(0.8*card_width);
-				// $(this).height(image_height_ratio*0.8*card_width);
-			} 
-		})
+		// 	if (image_width_ratio*adjusted_height > 0.8*card_width) {
+		// 		$(this).width(0.8*card_width);
+		// 		// $(this).height(image_height_ratio*0.8*card_width);
+		// 	} 
+		// })
 		
 		$card.addClass("flipped");
 		flippedCount++;

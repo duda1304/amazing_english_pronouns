@@ -63,90 +63,60 @@ $(document).ready(function () {
         renderProposedAnswers('.white-circle', pronouns, correctAnswer);
     }
 
-    function showMessage(message) {
-        $('.modal-body').text(message);
-        $('.modal').modal('show');
-    }
-
-    function hideMessage() {
-        $('.modal').modal('hide');
-    }
-
     const images = imageFileNames(pronouns, number_of_images);
-    let tryCount = 0;
     let randomElement;
     let correctAnswer;
 
     render();
    
-    $('div[data-answer="correct"], div[data-answer="incorrect"]').on('click', function() {
-        tryCount += 1;
+    function checkAnswer(event) {
+        $this = event.currentTarget;
+        $(this).next().off('click', checkAnswer);
         if ($(this).data('answer') === correct_incorrect) {
             $(this).addClass('correct animate__animated animate__bounce animate__slow');
-            if (images.length > 33) {
-                setTimeout(() => {
-                    tryCount = 0;
-                    correct_incorrect = '';
-                    $(this).removeClass('correct animate__animated animate__bounce animate__slow incorrect animate__animated animate__shakeX');
-                    render();
-                }, 2000);
-            } else {
-                $(this).on('click', function(){return})
-            }
         } else {
             $(this).addClass('incorrect animate__animated animate__shakeX animate__slow');
-            if (tryCount < 2) {
-                showMessage('Please try again');
-                setTimeout(() => {
-                    hideMessage();
-                    $(this).removeClass('correct animate__animated animate__bounce animate__slow incorrect animate__animated animate__shakeX');
-                }, 2000);
-            } else {
-                if (images.length > 33) {
-                    setTimeout(() => {
-                        tryCount = 0;
-                        correct_incorrect = '';
-                        $(this).removeClass('correct animate__animated animate__bounce animate__slow incorrect animate__animated animate__shakeX');
-                        render();
-                    }, 2000);
-                } else {
-                    $(this).on('click', function(){return})
-                }
-            }
         }
-    })
-    // $('#proposed_answers>div').on('click', function() {
-    //     tryCount += 1;
-    //     if ($(this).text().toLowerCase() === correctAnswer) {
-    //         $(this).css('background-color', 'green');
-    //         if (images.length > 0) {
-    //             setTimeout(() => {
-    //                 tryCount = 0;
-    //                 $(this).css('background-color', '');
-    //                 render();
-    //             }, 1000);
-    //         }
-    //     } else {
-    //         if (tryCount < 2) {
-    //             $(this).css('background-color', 'red');
-    //             showMessage('Please try again');
-    //             setTimeout(() => {
-    //                 hideMessage();
-    //                 $(this).css('background-color', '');
-    //             }, 1000);
-    //         } else {
-    //             $(`#proposed_answers>div:contains("${correctAnswer}")`).css('background-color', 'green');
-    //             if (images.length > 0) {
-    //                 setTimeout(() => {
-    //                     tryCount = 0;
-    //                     $(`#proposed_answers>div:contains("${correctAnswer}")`).css('background-color', '');
-    //                     render();
-    //                 }, 1000);
-    //             }
-    //         }
-    //     }
-    // });
 
+        if (images.length > 0) {
+            setTimeout(() => {
+                correct_incorrect = '';
+                $(this).removeClass('correct animate__animated animate__bounce animate__slow incorrect animate__animated animate__shakeX');
+                render();
+                $(this).next().on('click', checkAnswer);
+            }, 2000);
+        } else {
+            $(this).off('click', checkAnswer);
+        }
+
+        // if ($(this).data('answer') === correct_incorrect) {
+        //     $(this).addClass('correct animate__animated animate__bounce animate__slow');
+        //     if (images.length > 0) {
+        //         setTimeout(() => {
+        //             correct_incorrect = '';
+        //             $(this).removeClass('correct animate__animated animate__bounce animate__slow incorrect animate__animated animate__shakeX');
+        //             render();
+        //             $(this).next().bind('click', checkAnswer);
+        //         }, 2000);
+        //     } else {
+        //         $(this).unbind('click', checkAnswer);
+        //     }
+        // } else {
+        //     $(this).addClass('incorrect animate__animated animate__shakeX animate__slow');
+        //         if (images.length > 0) {
+        //             setTimeout(() => {
+        //                 correct_incorrect = '';
+        //                 $(this).removeClass('correct animate__animated animate__bounce animate__slow incorrect animate__animated animate__shakeX');
+        //                 render();
+        //                 $(this).next().bind('click', checkAnswer);
+        //             }, 2000);
+        //         } else {
+        //             $(this).unbind('click', checkAnswer);
+        //         }
+        // }
+    }
+
+    $('div[data-answer="correct"], div[data-answer="incorrect"]').on('click', checkAnswer);
    
 });
 
