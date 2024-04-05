@@ -3,13 +3,14 @@ $(document).ready(function () {
     const pronouns = ['i', 'you', 'he', 'she', 'it', 'we', 'they'];
     const number_of_images = {
         'i' : 3,
-        'you' : 6,
-        'he' : 3,
-        'she' : 3,
-        'it' : 3,
-        'we' : 3,
-        'they' : 6
+        'you' : 4,
+        'he' : 5,
+        'she' : 7,
+        'it' : 11,
+        'we' : 4,
+        'they' : 2
     };
+    const possibleAnswersBoolean = ['correct', 'incorrect'];
 
     function imageFileNames(pronouns, number_of_images) {
         let fileNames = [];
@@ -27,15 +28,19 @@ $(document).ready(function () {
         return removedElement;
     };
 
-    function createPossibleAnswers(arr, correctAnswer, answersCount) {
-        let proposedAnswers = [correctAnswer];
-        while (proposedAnswers.length < answersCount) {
+    let correct_incorrect = '';
+    function createPossibleAnswer(arr, correctAnswer) {
+        let proposedAnswer;
+        let randomIndex = Math.floor(Math.random() * possibleAnswersBoolean.length);
+
+        correct_incorrect = possibleAnswersBoolean[randomIndex];
+        if (possibleAnswersBoolean[randomIndex] === 'correct') {
+            proposedAnswer = correctAnswer;
+        } else {
             let randomIndex = Math.floor(Math.random() * arr.length);
-            if (!proposedAnswers.includes(arr[randomIndex])) {
-                proposedAnswers.push(arr[randomIndex]);
-            }
+            proposedAnswer = arr[randomIndex];
         }
-        return shuffleArray(proposedAnswers);
+        return proposedAnswer;
     }
 
     function shuffleArray(array) {
@@ -47,18 +52,15 @@ $(document).ready(function () {
     }
 
     function renderProposedAnswers(selector, allAnswers, correctAnswer) {
-        const count = $(selector).length;
-        const proposedAnswers = createPossibleAnswers(allAnswers, correctAnswer, count);
-        $(selector).each(function(){
-            $(this).text(proposedAnswers.shift());
-        })
+        const proposedAnswer = createPossibleAnswer(allAnswers, correctAnswer);
+        $(selector).text(proposedAnswer);
     }
    
     function render() {
         randomElement = pickAndRemoveRandomElement(images);
         correctAnswer = randomElement.split('_')[0];
-        document.querySelector('.container-right img').src = `media/1_1/${randomElement}`;
-        renderProposedAnswers('#proposed_answers>div', pronouns, correctAnswer);
+        document.querySelector('.container-right img').src = `media/1_3/${randomElement}`;
+        renderProposedAnswers('.white-circle', pronouns, correctAnswer);
     }
 
     function showMessage(message) {
@@ -77,13 +79,14 @@ $(document).ready(function () {
 
     render();
    
-    $('#proposed_answers>div').on('click', function() {
+    $('div[data-answer="correct"], div[data-answer="incorrect"]').on('click', function() {
         tryCount += 1;
-        if ($(this).text().toLowerCase() === correctAnswer) {
+        if ($(this).data('answer') === correct_incorrect) {
             $(this).addClass('correct animate__animated animate__bounce animate__slow');
-            if (images.length > 0) {
+            if (images.length > 33) {
                 setTimeout(() => {
                     tryCount = 0;
+                    correct_incorrect = '';
                     $(this).removeClass('correct animate__animated animate__bounce animate__slow incorrect animate__animated animate__shakeX');
                     render();
                 }, 2000);
@@ -91,19 +94,19 @@ $(document).ready(function () {
                 $(this).on('click', function(){return})
             }
         } else {
+            $(this).addClass('incorrect animate__animated animate__shakeX animate__slow');
             if (tryCount < 2) {
-                $(this).addClass('incorrect animate__animated animate__shakeX animate__slow');
                 showMessage('Please try again');
                 setTimeout(() => {
                     hideMessage();
                     $(this).removeClass('correct animate__animated animate__bounce animate__slow incorrect animate__animated animate__shakeX');
                 }, 2000);
             } else {
-                $(`#proposed_answers>div:contains("${correctAnswer}")`).addClass('correct animate__animated animate__bounce animate__slow');
-                if (images.length > 0) {
+                if (images.length > 33) {
                     setTimeout(() => {
                         tryCount = 0;
-                        $(`#proposed_answers>div:contains("${correctAnswer}")`).removeClass('correct animate__animated animate__bounce animate__slow incorrect animate__animated animate__shakeX');
+                        correct_incorrect = '';
+                        $(this).removeClass('correct animate__animated animate__bounce animate__slow incorrect animate__animated animate__shakeX');
                         render();
                     }, 2000);
                 } else {
@@ -111,20 +114,40 @@ $(document).ready(function () {
                 }
             }
         }
-    });
-
-    // $('button:contains("next")').on('click', function() {
-    //     if (images.length > 0) {
-    //         randomElement = pickAndRemoveRandomElement(images);
-    //         correctAnswer = randomElement.split('_')[0];
-    //         document.querySelector('.card2').src = `media/1_1/${randomElement}`;
-    //         renderProposedAnswers('#proposed_answers>div', pronouns, correctAnswer);
+    })
+    // $('#proposed_answers>div').on('click', function() {
+    //     tryCount += 1;
+    //     if ($(this).text().toLowerCase() === correctAnswer) {
+    //         $(this).css('background-color', 'green');
+    //         if (images.length > 0) {
+    //             setTimeout(() => {
+    //                 tryCount = 0;
+    //                 $(this).css('background-color', '');
+    //                 render();
+    //             }, 1000);
+    //         }
     //     } else {
-    //         $(this).attr('disabled', true);
+    //         if (tryCount < 2) {
+    //             $(this).css('background-color', 'red');
+    //             showMessage('Please try again');
+    //             setTimeout(() => {
+    //                 hideMessage();
+    //                 $(this).css('background-color', '');
+    //             }, 1000);
+    //         } else {
+    //             $(`#proposed_answers>div:contains("${correctAnswer}")`).css('background-color', 'green');
+    //             if (images.length > 0) {
+    //                 setTimeout(() => {
+    //                     tryCount = 0;
+    //                     $(`#proposed_answers>div:contains("${correctAnswer}")`).css('background-color', '');
+    //                     render();
+    //                 }, 1000);
+    //             }
+    //         }
     //     }
     // });
 
-
+   
 });
 
 

@@ -67,8 +67,16 @@ X
 
 .memory-card {
   /* margin: 10px; */
+  position: relative;
   cursor: pointer;
   gap: 20px;
+}
+
+.memory-card p {
+  position: absolute;
+  bottom: 2px;
+  margin-bottom: 0px;
+  color: white;
 }
 
 .card-image {
@@ -86,7 +94,7 @@ X
 
 .memory-game-image {
   height: 70%;
-  margin-top: 20%;
+  margin-top: 10%;
   object-fit: contain;
 }
 
@@ -204,7 +212,7 @@ figure {
   border-radius: 6px;
   border: 1.5px solid #639454;
   font-size: max(min(1.5vw, 20px), 14px);
-  background: #80BF6C;
+  background-color: #80BF6C !important;
   display: flex;
   justify-content: center;
 }
@@ -213,10 +221,24 @@ figure {
   border-radius: 6px;
   border: 1.5px solid #C1393B;
   font-size: max(min(1.5vw, 20px), 14px);
-  background: #E04245;
+  background: #E04245 !important;
   display: flex;
   justify-content: center;
 }
+
+/* activity 3 */
+.white-circle {
+  width: 25px;
+  height: 25px;
+  background-color: white;
+  position: absolute;
+  top: 3%;
+  left: 3%;
+  font-family: "Caveat Brush", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
 
 /* activity 04  */
 .btn-clear-blue,
