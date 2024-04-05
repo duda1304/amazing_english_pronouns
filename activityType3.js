@@ -56,10 +56,6 @@ $(document).ready(function () {
     }
 
     const images = imageFileNames(pronouns, number_of_images);
-    let tryCount = 0;
-    let randomElement;
-    let correctAnswer;
-
     render();
     
     function generateRandomString(length) {
@@ -94,40 +90,71 @@ $(document).ready(function () {
         event.target.value = data;
 
         const identifier = event.originalEvent.dataTransfer.getData("identifier");
-        console.log(identifier);
         $(`#${identifier}`).css('visibility', 'hidden');
 
         count += 1;
         if (count === $('.container-right img').length) {
+            count = 0;
             checkResponses();
         }
     });
 
     let countCorrect = 0;
+    let countTry = 0;
     function checkResponses() {
+        countTry += 1;
         $('.match-game-column').each(function() {
             const file_name_parts = $(this).find('img').attr('src').split('/');
             if (file_name_parts[file_name_parts.length - 1].split('_')[0] === $(this).find('input').val().toLowerCase()) {
-                // $(this).find('input').css('background-color', 'green');
-                $(this).find('input').addClass('correct animate__animated animatebounce animate__slow');
+                $(this).find('input').addClass('correct animate__animated animate__bounce animate__slow');
                 countCorrect += 1;
             } else {
-                // $(this).find('input').css('background-color', 'red');
-                $(this).find('input').addClass('incorrect animate__animated animateshakeX animate__slow');
+                $(this).find('input').addClass('incorrect animate__animated animate__shakeX animate__slow');
             }
         });
 
-        if (countCorrect < $('.match-game-column').length) {
-            $('.modal-body').text('Please try again');
-            $('.modal').modal('show');
-            // setTimeout(() => {
-            //     $('.modal').modal('hide');
-            //     $('.match-game-column input').each(function() {
-            //         $(this).removeClass('correct animate_animated animatebounce animate_slow incorrect animate_animated animateshakeX')
-            //     });
-            // }, 1000);
-                
+        if (countTry === 2) {
+            if (images.length > 0) {
+                setTimeout(() => {
+                    countCorrect = 0;
+                    countTry = 0;
+                    $('.match-game-column input').each(function() {
+                        $(this).removeClass('correct animate__animated animate__bounce animate__slow incorrect animate__animated animate__shakeX')
+                    });
+                    $('#proposed_answers div').css('visibility', '');
+                    $('.match-game-column input').val('');
+                    render();
+                }, 2000);
+            }
+        } else {
+            if (countCorrect < $('.match-game-column').length) {
+                $('.modal-body').text('Please try again');
+                $('.modal').modal('show');
+                setTimeout(() => {
+                    $('.modal').modal('hide');
+                    $('.match-game-column input').each(function() {
+                        $(this).removeClass('correct animate__animated animate__bounce animate__slow incorrect animate__animated animate__shakeX')
+                    });
+                    $('#proposed_answers div').css('visibility', '');
+                    $('.match-game-column input').val('');
+                }, 2000);
+            } else {
+                if (images.length > 0) {
+                    setTimeout(() => {
+                        countCorrect = 0;
+                        countTry = 0;
+                        $('.match-game-column input').each(function() {
+                            $(this).removeClass('correct animate__animated animate__bounce animate__slow incorrect animate__animated animate__shakeX')
+                        });
+                        $('#proposed_answers div').css('visibility', '');
+                        $('.match-game-column input').val('');
+                        render();
+                    }, 2000);
+                }
+            }
         }
+
+       
     }
    
 });
