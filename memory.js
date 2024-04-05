@@ -12,6 +12,16 @@ $(document).ready(function () {
         'we' : 3,
         'they' : 6
     };
+	const french_pronouns = {
+		'i' : 'je',
+		'you' : 'tu',
+		'he' : 'il',
+		'she' : 'elle',
+		'it' : 'elle',
+		'we' : 'nous',
+		'You' : 'vous',
+		'they' : 'ils/elles'
+	}
 
 	function imageFileNames(pronouns, number_of_images) {
         let fileNames = [];
@@ -35,8 +45,12 @@ $(document).ready(function () {
 	count = 1;
 	while (count <= 9) {
 		const randomElement = pickAndRemoveRandomElement(all_images);
-		images.push(randomElement);
-		images.push(randomElement);
+		images.push({'src' : randomElement, 'text' : randomElement.split('_')[0]});
+		let french_word = french_pronouns[randomElement.split('_')[0]];
+		if (randomElement.includes('you_1') || randomElement.includes('you_2') || randomElement.includes('you_6')) {
+			french_word = french_pronouns['You'];
+		}
+		images.push({'src' : randomElement, 'text' : french_word});
 		count += 1;
 	}
 
@@ -48,6 +62,7 @@ $(document).ready(function () {
 		return (`<div class="col-2">
 					<div class="memory-card card-image" data-index="${index}">
 						<img src="" class="memory-game-image"></img>
+						<p></p>
 					</div>
 				</div>`);
 	}
@@ -67,26 +82,25 @@ $(document).ready(function () {
 
 	function flipCard($card, index) {
 		$card.css('background-image', "url('./media/memory-front.png')");
-		// $card.find('img[src*="backside"]').hide();
-		// $card.find('img[src*="front"]').show();
-		$card.find('.memory-game-image').attr('src', `./media/1_1/${images[index]}`);
+		$card.find('.memory-game-image').attr('src', `./media/1_1/${images[index]['src']}`);
+		$card.find('p').text(images[index]['text']);
+		$card.find('.memory-game-image').on('load', function() {
+			const image_width = $(this).width();
+			const image_height = $(this).height();
+		
+			const card_width = $(this).parent().width();
+			const card_height = $(this).parent().height();
+		
+			const image_width_ratio = image_width/image_height;
+			const image_height_ratio = card_height/card_width;
 
-		// $card.find('.memory-game-image').on('load', function() {
-		// 	const image_width = $(this).width();
-		// 	const image_height = $(this).height();
+			const adjusted_height = 0.7*card_height;
 		
-		// 	const card_width = $(this).parent().width();
-		// 	const card_height = $(this).parent().height();
-		
-		// 	const image_width_ratio = image_width/image_height;
-		
-		// 	const adjusted_height = 0.6*card_height;
-		
-		// 	if ((image_width/image_height)*adjusted_height > 0.8*card_width) {
-		// 		$(this).width(0.9*card_width);
-		// 		$(this).height((image_height/image_width)*0.8*card_width);
-		// 	} 
-		// })
+			if (image_width_ratio*adjusted_height > 0.8*card_width) {
+				$(this).width(0.8*card_width);
+				// $(this).height(image_height_ratio*0.8*card_width);
+			} 
+		})
 		
 		$card.addClass("flipped");
 		flippedCount++;
@@ -95,7 +109,8 @@ $(document).ready(function () {
 
 	function resetFlippedCards() {
 		flippedCards.forEach(function (card) {
-			card.find('.memory-game-image').attr('src', '');
+			card.find('.memory-game-image').attr('src', './media/transparent.png');
+			card.find('p').text('');
 			card.css('background-image', "url('./media/memory-backside.png')");
 			// card.find('img[src*="backside"]').show();
 			// card.find('img[src*="front"]').hide();

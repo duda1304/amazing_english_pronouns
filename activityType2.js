@@ -83,13 +83,15 @@ $(document).ready(function () {
         tryCount += 1;
         if ($(this).data('answer') === correct_incorrect) {
             $(this).addClass('correct animate__animated animate__bounce animate__slow');
-            if (images.length > 0) {
+            if (images.length > 33) {
                 setTimeout(() => {
                     tryCount = 0;
                     correct_incorrect = '';
                     $(this).removeClass('correct animate__animated animate__bounce animate__slow incorrect animate__animated animate__shakeX');
                     render();
                 }, 2000);
+            } else {
+                $(this).on('click', function(){return})
             }
         } else {
             $(this).addClass('incorrect animate__animated animate__shakeX animate__slow');
@@ -100,13 +102,15 @@ $(document).ready(function () {
                     $(this).removeClass('correct animate__animated animate__bounce animate__slow incorrect animate__animated animate__shakeX');
                 }, 2000);
             } else {
-                if (images.length > 0) {
+                if (images.length > 33) {
                     setTimeout(() => {
                         tryCount = 0;
                         correct_incorrect = '';
                         $(this).removeClass('correct animate__animated animate__bounce animate__slow incorrect animate__animated animate__shakeX');
                         render();
                     }, 2000);
+                } else {
+                    $(this).on('click', function(){return})
                 }
             }
         }

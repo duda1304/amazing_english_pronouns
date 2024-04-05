@@ -67,8 +67,16 @@ X
 
 .memory-card {
   /* margin: 10px; */
+  position: relative;
   cursor: pointer;
   gap: 20px;
+}
+
+.memory-card p {
+  position: absolute;
+  bottom: 2px;
+  margin-bottom: 0px;
+  color: white;
 }
 
 .card-image {
@@ -86,7 +94,7 @@ X
 
 .memory-game-image {
   height: 70%;
-  margin-top: 20%;
+  margin-top: 10%;
   object-fit: contain;
 }
 

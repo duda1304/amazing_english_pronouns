@@ -87,6 +87,8 @@ $(document).ready(function () {
                     $(this).removeClass('correct animate__animated animate__bounce animate__slow incorrect animate__animated animate__shakeX');
                     render();
                 }, 2000);
+            } else {
+                $(this).on('click', function(){return})
             }
         } else {
             if (tryCount < 2) {
@@ -104,6 +106,8 @@ $(document).ready(function () {
                         $(`#proposed_answers>div:contains("${correctAnswer}")`).removeClass('correct animate__animated animate__bounce animate__slow incorrect animate__animated animate__shakeX');
                         render();
                     }, 2000);
+                } else {
+                    $(this).on('click', function(){return})
                 }
             }
         }
