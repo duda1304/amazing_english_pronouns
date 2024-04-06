@@ -88,32 +88,6 @@ $(document).ready(function () {
         } else {
             $(this).off('click', checkAnswer);
         }
-
-        // if ($(this).data('answer') === correct_incorrect) {
-        //     $(this).addClass('correct animate__animated animate__bounce animate__slow');
-        //     if (images.length > 0) {
-        //         setTimeout(() => {
-        //             correct_incorrect = '';
-        //             $(this).removeClass('correct animate__animated animate__bounce animate__slow incorrect animate__animated animate__shakeX');
-        //             render();
-        //             $(this).next().bind('click', checkAnswer);
-        //         }, 2000);
-        //     } else {
-        //         $(this).unbind('click', checkAnswer);
-        //     }
-        // } else {
-        //     $(this).addClass('incorrect animate__animated animate__shakeX animate__slow');
-        //         if (images.length > 0) {
-        //             setTimeout(() => {
-        //                 correct_incorrect = '';
-        //                 $(this).removeClass('correct animate__animated animate__bounce animate__slow incorrect animate__animated animate__shakeX');
-        //                 render();
-        //                 $(this).next().bind('click', checkAnswer);
-        //             }, 2000);
-        //         } else {
-        //             $(this).unbind('click', checkAnswer);
-        //         }
-        // }
     }
 
     $('div[data-answer="correct"], div[data-answer="incorrect"]').on('click', checkAnswer);

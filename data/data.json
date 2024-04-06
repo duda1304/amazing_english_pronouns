@@ -1,0 +1,20 @@
+{
+    "1" : {
+        "activity1" : "select_answer",
+        "activity2" : "memory",
+        "activity3" : "correct_incorrect",
+        "activity4" : "drag_and_drop"
+    },
+    "2" : {
+        "activity1" : "correct_incorrect",
+        "activity2" : "memory",
+        "activity3" : "secret_code",
+        "activity4" : "write_responses_no_images"
+    },
+    "3" : {
+        "activity1" : "secret_code",
+        "activity2" : "memory",
+        "activity3" : "write_responses_with_images",
+        "activity4" : "write_responses_no_images"
+    }
+}
