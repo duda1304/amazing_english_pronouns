@@ -366,13 +366,64 @@ figure {
 
 /* activity 3 (10 -12) */
 
+.box-31012 {
+  position: relative;
+  width: 100%;
+  padding-top: 100%;
+  background-color: white;
+  border-radius: 10% 10% 0% 0%;
+  overflow: hidden;
+}
+
+.top-image-31012 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 67%;
+  background-color: white;
+  border-radius: 10% 10% 0% 0%;
+  box-sizing: border-box;
+}
+
+.top-image-31012 img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  margin: auto;
+}
+
+.bottom-text-31012 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 33%;
+  background-color: #E2EEFF;
+  padding: 2% 5%;
+  box-sizing: border-box;
+}
+
+.bottom-english-31012 {
+  color: #524961;
+  font-weight: bold;
+  font-size: 0.9rem;
+  margin-bottom: 1px;
+}
+
+.bottom-french-31012 {
+  color: #524961;
+  font-style: italic;
+  font-size: 0.7rem;
+}
+
 .english-31012 {
   font-size: max(min(1.2vw, 10px), 10px);
 }
 
 .french-31012 {
   font-size: max(min(1.2vw, 10px), 10px);
-
 }
 
 /* buttons navigation */
@@ -404,7 +455,7 @@ figure {
     height: 40vh;
   }
 
- 
+
 }
 
 
