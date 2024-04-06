@@ -181,7 +181,7 @@ body {
 .instruction-en {
   color: #00A864;
   /* font-size: max(min(1vw, 26px), 20px); */
-  font-size: max(min(1.6vw, 20px), 14px);
+  font-size: max(min(1.6vw, 20px), 12px);
   font-style: normal;
   font-weight: 700;
   line-height: normal;
@@ -190,7 +190,7 @@ body {
 .instruction-fr {
   color: #286FB5;
   /* font-size: max(min(1vw, 26px), 16px); */
-  font-size: max(min(1.4vw, 18px), 12px);
+  font-size: max(min(1.4vw, 18px), 11px);
   font-style: italic;
   font-weight: 400;
   line-height: 20px;
@@ -387,6 +387,7 @@ figure {
   background-color: white;
   border-radius: 10% 10% 0% 0%;
   overflow: hidden;
+  min-height: 125px;
 }
 
 .top-image-31012 {
@@ -394,7 +395,7 @@ figure {
   top: 0;
   left: 0;
   width: 100%;
-  height: 67%;
+  height: 64%;
   background-color: white;
   border-radius: 10% 10% 0% 0%;
   box-sizing: border-box;
@@ -406,6 +407,7 @@ figure {
   object-fit: contain;
   display: block;
   margin: auto;
+  padding: 7%;
 }
 
 .bottom-text-31012 {
@@ -413,23 +415,34 @@ figure {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 33%;
+  height: 36%;
+  min-height: 65px;
   background-color: #E2EEFF;
-  padding: 2% 5%;
+  padding: 5% 5%;
   box-sizing: border-box;
 }
 
 .bottom-english-31012 {
   color: #524961;
   font-weight: bold;
-  font-size: 0.9rem;
+  font-size: max(min(1.2vw, 13px), 9px);
   margin-bottom: 1px;
+}
+
+.bottom-english-31012 .form-control {
+  width: 3vw;
+  min-width: 25px;
+  font-size: max(min(1.2vw, 15px), 10px);
+  font-weight: bold;
+  margin: auto;
+  padding: 0;
+  /* text-align: center; */
 }
 
 .bottom-french-31012 {
   color: #524961;
   font-style: italic;
-  font-size: 0.7rem;
+  font-size: 0.5rem;
 }
 
 .english-31012 {
