@@ -73,6 +73,16 @@ $(document).ready(function () {
     
     $('#proposed_answers div').attr('draggable', 'true');
     
+    // $('#proposed_answers div').on('touchstart', function(event) {
+    //     // Prevent scrolling when dragging starts
+    //     document.body.style.overflow = 'hidden';
+    // });
+    
+    // $('#proposed_answers div').on('touchend', function(event) {
+    //     // Allow scrolling when dragging ends
+    //     document.body.style.overflow = '';
+    // });
+
     $('#proposed_answers div').on('dragstart', function(event) {
         event.originalEvent.dataTransfer.setData("text", $(this).text().toUpperCase()); 
         const identifier = generateRandomString(10);
@@ -84,10 +94,11 @@ $(document).ready(function () {
     });
     
     let count = 0;
-    $('.container-right input').on('drop', function(event) {
+    $('.container-right .drop_box').on('drop', function(event) {
         event.preventDefault();
         const data = event.originalEvent.dataTransfer.getData("text");
-        event.target.value = data;
+        // event.target.value = data;
+        $(event.currentTarget).text(data);
 
         const identifier = event.originalEvent.dataTransfer.getData("identifier");
         $(`#${identifier}`).css('visibility', 'hidden');
