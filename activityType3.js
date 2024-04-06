@@ -57,7 +57,7 @@ $(document).ready(function () {
 
     const images = imageFileNames(pronouns, number_of_images);
     render();
-    
+   
     function generateRandomString(length) {
         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         let result = '';
@@ -67,47 +67,38 @@ $(document).ready(function () {
         return result;
     }
 
-    $('.container-right input').on('dragover', function(event) {
+    $('.container-right .drop_box').on('dragover', function(event) {
         event.preventDefault();
     });
     
     $('#proposed_answers div').attr('draggable', 'true');
-    
-    // $('#proposed_answers div').on('touchstart', function(event) {
-    //     // Prevent scrolling when dragging starts
-    //     document.body.style.overflow = 'hidden';
-    // });
-    
-    // $('#proposed_answers div').on('touchend', function(event) {
-    //     // Allow scrolling when dragging ends
-    //     document.body.style.overflow = '';
-    // });
+
 
     $('#proposed_answers div').on('dragstart', function(event) {
         event.originalEvent.dataTransfer.setData("text", $(this).text().toUpperCase()); 
         const identifier = generateRandomString(10);
         $(this).attr('id', identifier);
-        console.log($(this).data());
         event.originalEvent.dataTransfer.setData("identifier", identifier);
-        console.log(identifier);
-        
     });
     
     let count = 0;
     $('.container-right .drop_box').on('drop', function(event) {
         event.preventDefault();
-        const data = event.originalEvent.dataTransfer.getData("text");
-        // event.target.value = data;
-        $(event.currentTarget).text(data);
-
-        const identifier = event.originalEvent.dataTransfer.getData("identifier");
-        $(`#${identifier}`).css('visibility', 'hidden');
-
-        count += 1;
-        if (count === $('.container-right img').length) {
-            count = 0;
-            checkResponses();
-        }
+        if ($(event.currentTarget).find('input').val() === '') {
+            const data = event.originalEvent.dataTransfer.getData("text");
+            $(event.currentTarget).find('input').val(data);
+    
+            const identifier = event.originalEvent.dataTransfer.getData("identifier");
+            $(`#${identifier}`).css('visibility', 'hidden');
+    
+            count += 1;
+            if (count === $('.container-right img').length) {
+                count = 0;
+                checkResponses();
+            }
+        } else {
+            return
+        }        
     });
 
     let countCorrect = 0;
@@ -123,7 +114,7 @@ $(document).ready(function () {
                 $(this).find('input').addClass('incorrect animate__animated animate__shakeX animate__slow');
             }
         });
-
+    
         if (countTry === 2) {
             if (images.length > 0) {
                 setTimeout(() => {
@@ -164,8 +155,7 @@ $(document).ready(function () {
                 }
             }
         }
-
-       
     }
    
 });
+
