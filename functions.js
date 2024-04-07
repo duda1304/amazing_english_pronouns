@@ -61,7 +61,6 @@ $(document).ready(async function () {
 	$('.card-landing').on('click', function(index, element) {
 		localStorage.setItem('activity', `activity${$(this).data("activity")}`);
 		window.location.href = 'game.html';
-		// window.location.href = `activity${$(this).data('activity')}.html`;
 	});
 
 	$('.instruction-en').append(`<i class="fas fa-volume-up"></i>`);
