@@ -1,15 +1,28 @@
 $(document).ready(function () {
 
+   
     const pronouns = ['i', 'you', 'he', 'she', 'it', 'we', 'they'];
-    const number_of_images = {
-        'i' : 2,
-        'you' : 5,
-        'he' : 4,
-        'she' : 7,
-        'it' : 5,
-        'we' : 4,
-        'they' : 3
+    let number_of_images = {
+        // 'i' : 2,
+        // 'you' : 5,
+        // 'he' : 4,
+        // 'she' : 7,
+        // 'it' : 5,
+        // 'we' : 4,
+        // 'they' : 3
     };
+
+    if (localStorage.getItem('age') == 2) {
+        number_of_images = {
+            'i' : 2,
+            'you' : 5,
+            'he' : 4,
+            'she' : 7,
+            'it' : 5,
+            'we' : 4,
+            'they' : 3
+        }
+    }
 
     function imageFileNames(pronouns, number_of_images) {
         let fileNames = [];
@@ -36,127 +49,79 @@ $(document).ready(function () {
     }
 
     function render() {
-        let count = 0;
+        let randomElement = pickAndRemoveRandomElement(images);
+        let correctAnswer = randomElement.split('_')[0];
+        $('#proposed_answer div').text(correctAnswer);
 
-        let answers = [];
-        while (count <= 2) {
-            let randomElement = pickAndRemoveRandomElement(images);
-            document.querySelectorAll('.container-right img:not(.audio-icon)')[count].src = `media/2_3/${randomElement}`;
-            answers.push(randomElement.split('_')[0]);
+
+        const proposedNumbersCount = $('.secret-code > div').length;
+        const codeLength = $('input[type="text"]').length;
+
+        let count = 1;
+        let proposedImages = [randomElement];
+        while (count < proposedNumbersCount) {
+            if (count < codeLength) {
+                let sameMeaningImage = images.find(element => element.split('_')[0] === correctAnswer && element !== randomElement);
+                const index = images.indexOf(sameMeaningImage);
+                images.splice(index, 1)[0];
+                proposedImages.push(sameMeaningImage);
+            } else {
+                let found = false;
+                while (found === false) {
+                    let randomElement = pickAndRemoveRandomElement(images);
+                    if (randomElement.split('_')[0] !== correctAnswer) {
+                        proposedImages.push(randomElement);
+                        found = true;
+                    }
+                }
+            }
             count += 1;
         }
 
-        let proposedAnswers = shuffleArray(answers);
-
-        count = 0;
-        while (count < 1) {
-            document.querySelectorAll('#proposed_answer div')[count].textContent = proposedAnswers[count];
-            count += 1;
-        }
+        let proposedImagesShuffled = shuffleArray(proposedImages);
+        proposedImagesShuffled.forEach((value,index) => {
+            document.querySelectorAll('.container-right img:not(.audio-icon)')[index].src = `media/${localStorage.getItem('age')}_${localStorage.getItem('activity')[localStorage.getItem('activity').length -1]}/${value}`;
+            $(document.querySelectorAll('.container-right img:not(.audio-icon)')[index]).parent().next().text(Math.floor(Math.random() * 9) + 1);
+            if (value.split('_')[0] === correctAnswer) {
+                $($('.proposed_part_of_code')[index]).parent().next().data('correct', 'true');
+            } else {
+                $($('.proposed_part_of_code')[index]).parent().next().data('correct', 'false');
+            }
+        });
     }
 
     const images = imageFileNames(pronouns, number_of_images);
     render();
    
-    function generateRandomString(length) {
-        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        let result = '';
-        for (let i = 0; i < length; i++) {
-            result += characters.charAt(Math.floor(Math.random() * characters.length));
-        }
-        return result;
-    }
-
-    $('.container-right .drop_box').on('dragover', function(event) {
-        event.preventDefault();
-    });
-    
-    $('#proposed_answers div').attr('draggable', 'true');
-
-
-    $('#proposed_answers div').on('dragstart', function(event) {
-        event.originalEvent.dataTransfer.setData("text", $(this).text().toUpperCase()); 
-        const identifier = generateRandomString(10);
-        $(this).attr('id', identifier);
-        event.originalEvent.dataTransfer.setData("identifier", identifier);
-    });
-    
-    let count = 0;
-    $('.container-right .drop_box').on('drop', function(event) {
-        event.preventDefault();
-        if ($(event.currentTarget).find('input').val() === '') {
-            const data = event.originalEvent.dataTransfer.getData("text");
-            $(event.currentTarget).find('input').val(data);
-    
-            const identifier = event.originalEvent.dataTransfer.getData("identifier");
-            $(`#${identifier}`).css('visibility', 'hidden');
-    
-            count += 1;
-            if (count === $('.container-right img').length) {
-                count = 0;
-                checkResponses();
-            }
-        } else {
-            return
-        }        
-    });
-
-    let countCorrect = 0;
-    let countTry = 0;
-    function checkResponses() {
-        countTry += 1;
-        $('.match-game-column').each(function() {
-            const file_name_parts = $(this).find('img').attr('src').split('/');
-            if (file_name_parts[file_name_parts.length - 1].split('_')[0] === $(this).find('input').val().toLowerCase()) {
-                $(this).find('input').addClass('correct animate__animated animate__bounce animate__slow');
-                countCorrect += 1;
-            } else {
-                $(this).find('input').addClass('incorrect animate__animated animate__shakeX animate__slow');
-            }
+    $('.proposed_part_of_code').on('click', function() {
+        let emptyInputs = $('input:text').filter(function() {
+            return $(this).val().trim() === '';
         });
-    
-        if (countTry === 2) {
-            if (images.length > 0) {
-                setTimeout(() => {
-                    countCorrect = 0;
-                    countTry = 0;
-                    $('.match-game-column input').each(function() {
-                        $(this).removeClass('correct animate__animated animate__bounce animate__slow incorrect animate__animated animate__shakeX')
-                    });
-                    $('#proposed_answers div').css('visibility', '');
-                    $('.match-game-column input').val('');
-                    render();
-                }, 2000);
-            }
-        } else {
-            if (countCorrect < $('.match-game-column').length) {
-                $('.modal-body').text('Please try again');
-                $('.modal').modal('show');
-                setTimeout(() => {
-                    $('.modal').modal('hide');
-                    $('.match-game-column input').each(function() {
-                        $(this).removeClass('correct animate__animated animate__bounce animate__slow incorrect animate__animated animate__shakeX')
-                    });
-                    $('#proposed_answers div').css('visibility', '');
-                    $('.match-game-column input').val('');
-                }, 2000);
-            } else {
-                if (images.length > 0) {
-                    setTimeout(() => {
-                        countCorrect = 0;
-                        countTry = 0;
-                        $('.match-game-column input').each(function() {
-                            $(this).removeClass('correct animate__animated animate__bounce animate__slow incorrect animate__animated animate__shakeX')
-                        });
-                        $('#proposed_answers div').css('visibility', '');
-                        $('.match-game-column input').val('');
-                        render();
-                    }, 2000);
-                }
-            }
+        if (emptyInputs.length !== 0 && $(this).data('selected') !== 'true') {
+            $(emptyInputs[0]).val($(this).text());
+            $(this).data('selected', 'true');
         }
+        emptyInputs = $('input:text').filter(function() {
+            return $(this).val().trim() === '';
+        });
+        
+        if (emptyInputs.length === 0) {
+            checkCode();
+        }
+    });
+console.log('ASDADS')
+    function checkCode() {
+        const elements = $('.proposed_part_of_code').filter(function() {
+            return $(this).data('selected') === 'true';
+        });
+        elements.each(function(index,value) {
+            if ($(this).data('correct') !== 'true' && $($('input:text')[index]).val() === $(this).text()) {
+                $($('input:text')[index]).addClass('correct animate__animated animate__bounce animate__slow');
+            } else {
+                $($('input:text')[index]).addClass('incorrect animate__animated animate__shakeX animate__slow');
+            }
+        })
     }
-
     $(".container-right img").on('load', function() {
         const width = this.naturalWidth;
         const height = this.naturalHeight;
