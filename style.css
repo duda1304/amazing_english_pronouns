@@ -317,10 +317,14 @@ figure {
   border-width: 1.5px;
   border-style: solid;
   font-size: max(min(1.2vw, 15px), 10px);
-  padding: 0.75rem 0.5rem;
+  /* padding: 0.75rem 0.5rem; */
+  padding: 0.5rem;
   display: flex;
   justify-content: center;
-  width: 100px;
+  width: min(100px, 10vw);
+  /* max-width: 10vw; */
+  /* width: 80%;
+  max-width: 100px; */
 }
 
 .btn-white-blue,
@@ -345,6 +349,7 @@ figure {
   font-family: 'Open Sans', sans-serif;
   font-weight: bold;
   text-align: center;
+  margin-bottom: 5px;
 }
 
 /* activity 4 (7 to 9 ) */

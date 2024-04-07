@@ -36,7 +36,12 @@ $(document).ready(async function () {
 	console.log(data);
 
 	if (window.location.href.includes('index.html')) {
-		$('.temp-buttons button[data-age="1"]').click();
+		if (!localStorage.getItem('age')) {
+			$('.temp-buttons button[data-age="1"]').click();
+		} else {
+			$(`.temp-buttons button[data-age="${localStorage.getItem('age')}"]`).click();
+		}
+		
 		localStorage.removeItem('activity');
 	}
 	if (window.location.href.includes('game.html') && localStorage.getItem('age') !== null && localStorage.getItem('activity') !== null) {
@@ -59,7 +64,7 @@ $(document).ready(async function () {
 		// window.location.href = `activity${$(this).data('activity')}.html`;
 	});
 
-	$('.instruction-en').append(`<span><img class="audio-icon" src="./media/audio_icon.svg"></span>`)
+	$('.instruction-en').append(`<i class="fas fa-volume-up"></i>`);
 
 	$('.container-left img').on('click', function() {
 		const fileNameParts = $(this).attr('src').split('_');
@@ -69,7 +74,7 @@ $(document).ready(async function () {
 
 	$('.instruction-en').css('cursor', 'pointer');
 	$('.instruction-en').on('click', function() {
-		// playSound(description[key]['audio']);
+		playSound(`./audio/pronouns/directions/${localStorage.getItem('age')}/${localStorage.getItem('activity')}.mp3`);
 	});
 
 
