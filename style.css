@@ -369,13 +369,17 @@ figure {
   width: 100%;
 }
 
+.story input {
+  text-align: center;
+}
+
 .volume-blue {
   color: #5A9DE9;
 }
 
 .english-479 {
   font-weight: bold;
-  font-size: max(min(1.6vw, 20px), 14px);
+  font-size: max(min(1.6vw, 20px), 13px);
 }
 
 .french-479 {
