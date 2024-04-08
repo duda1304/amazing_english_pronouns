@@ -82,24 +82,6 @@ $(document).ready(function () {
 		$card.css('background-image', "url('./media/memory-front.png')");
 		$card.find('.memory-game-image').attr('src', `./media/1_2/${images[index]['src']}`);
 		$card.find('p').text(images[index]['text']);
-		// $card.find('.memory-game-image').on('load', function() {
-		// 	const image_width = $(this).width();
-		// 	const image_height = $(this).height();
-		
-		// 	const card_width = $(this).parent().width();
-		// 	const card_height = $(this).parent().height();
-		
-		// 	const image_width_ratio = image_width/image_height;
-		// 	const image_height_ratio = card_height/card_width;
-
-		// 	const adjusted_height = 0.7*card_height;
-		
-		// 	if (image_width_ratio*adjusted_height > 0.8*card_width) {
-		// 		$(this).width(0.8*card_width);
-		// 		// $(this).height(image_height_ratio*0.8*card_width);
-		// 	} 
-		// })
-		
 		$card.addClass("flipped");
 		flippedCount++;
 		flippedCards.push($card);

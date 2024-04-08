@@ -93,6 +93,7 @@ body {
   color: white;
   font-weight: bold;
   text-transform: capitalize;
+  font-size: max(min(1.6vw, 20px), 12px);;
 }
 
 .card-image {
@@ -256,6 +257,26 @@ figure {
 
 
 /* activity 04  */
+@media only screen and (max-width: 940px) {
+  .drag-and-drop .container-left {
+    width: 35%;
+  }
+
+  .drag-and-drop .container-right {
+    width: 65%;
+  }
+}
+
+@media only screen and (max-width: 940px) {
+  .secret-code-game .container-left {
+    width: 35%;
+  }
+
+  .secret-code-game .container-right {
+    width: 65%;
+  }
+}
+
 .btn-clear-blue,
 .btn-clear-blue:hover {
   font-family: 'Open Sans', sans-serif;
@@ -277,7 +298,7 @@ figure {
   border-radius: 10px;
   height: 20vh;
   min-height: 125px;
-  margin-top: 2rem;
+  /* margin-top: 2rem; */
   width: 100%;
 }
 
@@ -427,7 +448,6 @@ figure {
   .story-game .container-right {
     width: 65%;
   }
-
 }
 
 

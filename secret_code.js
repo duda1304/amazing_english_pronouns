@@ -105,8 +105,6 @@ $(document).ready(function () {
         return array;
     }
 
-   
-
     function render() {
         let randomElement = pickAndRemoveRandomElement(compiledPages);
         let correctAnswer = randomElement[0].split('_')[0];
@@ -129,7 +127,7 @@ $(document).ready(function () {
         <div class="col-4 d-flex justify-content-center">
             <input type="text" class="btn-379 btn-white-green" disabled>
         </div>`);
-       }
+       };
     }
 
     let images;
