@@ -265,9 +265,7 @@ figure {
   .drag-and-drop .container-right {
     width: 65%;
   }
-}
 
-@media only screen and (max-width: 940px) {
   .secret-code-game .container-left {
     width: 35%;
   }
@@ -275,7 +273,16 @@ figure {
   .secret-code-game .container-right {
     width: 65%;
   }
+
+  .write-responses-no-images .container-left {
+    width: 35%;
+  }
+
+  .write-responses-no-images .container-right {
+    width: 65%;
+  }
 }
+
 
 .btn-clear-blue,
 .btn-clear-blue:hover {
