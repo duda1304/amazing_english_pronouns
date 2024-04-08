@@ -307,11 +307,11 @@ $(document).ready(async function () {
         let sanitizedValue = $(this).val().replace(/[^A-Za-z]/g, '');
         sanitizedValue = sanitizedValue.substring(0, 4);
         $(this).val(sanitizedValue);
-        // if (checkIfAllFilled() === true) {
-        //     $('button:contains("check")').removeAttr('disabled');
-        // } else {
-        //     $('button:contains("check")').attr('disabled', 'disabled');
-        // }
+        if (checkIfAllFilled() === true) {
+            $('button:contains("check")').removeAttr('disabled');
+        } else {
+            $('button:contains("check")').attr('disabled', 'disabled');
+        }
     }
 
     function checkIfAllFilled() {
@@ -343,7 +343,7 @@ $(document).ready(async function () {
             setTimeout(() => {
                 $('.story').children(':first-child').empty();
                 $('.story').children(':nth-child(2)').empty();
-                // $('button:contains("check")').attr('disabled', 'disabled');
+                $('button:contains("check")').attr('disabled', 'disabled');
                 if ($('audio').length !== 0) {
                     $('audio')[0].pause();
                 }
