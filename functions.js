@@ -48,7 +48,6 @@ $(document).ready(async function () {
 		const template = await fetch(`${data[localStorage.getItem('age')][localStorage.getItem('activity')]}.html`).then(response => response.text());
 		$('body').append(`<script src="${data[localStorage.getItem('age')][localStorage.getItem('activity')]}.js"></script>`);
 		$('body').append(template);
-		
 	} else {
 		if (window.location.href.includes('game.html')) {
 			window.location.href = 'index.html';
@@ -87,33 +86,5 @@ $(document).ready(async function () {
 		$('audio').attr('src', src);
 		$('audio')[0].play();
 	}
-	
+
 });
-
-// $(".container-right img").on('load', function() {
-// 	const width = this.naturalWidth;
-// 	const height = this.naturalHeight;
-
-// 	if (height/width >= 1.5) {
-// 		this.style.height = "90%";
-// 	} else if (height === width) {
-// 		this.style.height = "40%";
-// 	} else {
-// 		if (width/height >= 1.5) {
-// 			this.style.height = "40%";
-// 		} else if (width/height >= 1.2) {
-// 			this.style.height = "60%";
-// 		} else {
-// 			this.style.height = "80%";
-// 		}
-// 	}
-// });
-
-// .audio-icon {
-//     width: max(1vw, 14px);
-//     height: max(1vw, 14px);
-//     background-image: url(./img/audio_icon.svg);
-//     background-size: contain;
-//     background-repeat: no-repeat;
-// }
-

@@ -53,10 +53,63 @@ $(document).ready(async function () {
                     'a guinea pig (un cochon d’Inde)': 'it'
                 }
             ]
+        },
+        '3' : 
+        {'activity4' : 
+            [
+                {
+                    'the building (l’immeuble)': 'it',
+                    'Mary, Jessica and I (Mary, Jessica et moi)': 'we',
+                    'your siblings (tes frères et soeurs)': 'they',
+                    'your niece and you (tes nieces et toi)': 'you',
+                    'the singer and his dancers (le chanteur et ses danseurs)': 'they',
+                    'Olivia': 'she',
+                    'France': 'it',
+                    'my teammate and her parents (ma coéquipière et ses parents)': 'they',
+                    'Michael': 'he',
+                    'the snake (le serpent)': 'it'
+                },
+                {
+                    'the father of her friend (le père de son ami)': 'he',
+                    'the grandmother (la grand-mère)': 'she',
+                    'his stepbrother (son demi-frère)': 'he',
+                    'my English teacher and you (mon professeur d’anglais et moi)': 'you',
+                    'the neighbours and I (les voisins et moi)': 'we',
+                    'the armchair (le fauteuil)': 'it',
+                    'his cousins and you (ses cousins et toi)': 'you',
+                    'Chloe’s mother (la mère de Chloe)': 'she',
+                    'their twin sister (sa soeur jumelle)': 'she',
+                    'her nephew (son neveu)': 'he'
+                },
+                {
+                    'my boots (mes bottes)': 'they',
+                    'the frame (le cadre)': 'it',
+                    'my uncle (mon oncle)': 'he',
+                    'my teacher’s sister (la soeur de mon professeur)': 'she',
+                    'the remote control (la télécommande)': 'it',
+                    'my brother-in-law (mon beau-frère)': 'he',
+                    'your children (tes enfants)': 'they',
+                    'the flag (le drapeau)': 'it',
+                    'your stepmother and you (ta belle-mère et toi)': 'you',
+                    'his godmother (sa marraine)': 'she'
+                },
+                {
+                    'the laptop (l’ordinateur portable)': 'it',
+                    'my pupils (mes élèves)': 'they',
+                    'the file (le dossier)': 'it',
+                    'the waitress (la serveuse)': 'she',
+                    'Alice and I (Alice et moi)': 'we',
+                    'Dan and you (Dan et toi)': 'you',
+                    'the bed (le lit)': 'it',
+                    'my boyfriend (mon petit ami)': 'he',
+                    'the firefighters (les pompiers)': 'they',
+                    'the cooker (la gazinière)': 'it'
+                }
+            ]
         }
     }
    
-  
+    // 'my teacher’s sister (la soeur de mon professeur)': 'she', no audio
    
 
     function playSound(src) {
@@ -98,7 +151,7 @@ $(document).ready(async function () {
             </div>`)
         }
         $('.volume-blue').on('click', function() {
-            playSound(`./audio/pronouns/story/${localStorage.getItem('age')}/${localStorage.getItem('activity')}/${$(this).parent().text().toLowerCase().trim().replaceAll(' ', '_')}.mp3`);
+            playSound(`./audio/pronouns/story/${localStorage.getItem('age')}/${localStorage.getItem('activity')}/${$(this).parent().text().toLowerCase().trim().replace(/[^a-zA-Z\s]/g, '').replaceAll(' ', '_')}.mp3`);
         });
     }
 
@@ -109,6 +162,31 @@ $(document).ready(async function () {
         sanitizedValue = sanitizedValue.substring(0, 4);
         $(this).val(sanitizedValue);
     });
+
+    $('.story input').on('input', checkValue);
+
+    function checkValue(e) {
+        $this = e.currentTarget;
+        let sanitizedValue = $(this).val().replace(/[^A-Za-z]/g, '');
+        sanitizedValue = sanitizedValue.substring(0, 4);
+        $(this).val(sanitizedValue);
+        if (checkIfAllFilled() === true) {
+            $('button:contains("check")').removeAttr('disabled');
+        } else {
+            $('button:contains("check")').attr('disabled', 'disabled');
+        }
+    }
+
+    function checkIfAllFilled() {
+        let allFilled = true;
+        $('.story input').each(function() {
+            if ($(this).val().trim() === '') {
+                allFilled = false;
+                return;
+            }
+        });
+        return allFilled;
+    }
 
     $('button:contains("check")').on('click', function() {
 		checkResponses();
@@ -128,10 +206,11 @@ $(document).ready(async function () {
             setTimeout(() => {
                 $('.story').children(':first-child').empty();
                 $('.story').children(':nth-child(2)').empty();
+                $('button:contains("check")').attr('disabled', 'disabled');
                 render();
+                $('.story input').on('input', checkValue);
             }, 2000);
-        }
-        
+        } 
     }
 
 });
