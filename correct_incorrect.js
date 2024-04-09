@@ -55,7 +55,7 @@ $(document).ready(function () {
         const proposedAnswer = createPossibleAnswer(allAnswers, correctAnswer);
         $(selector).text(proposedAnswer);
     }
-   
+    
     function render() {
         randomElement = pickAndRemoveRandomElement(images);
         correctAnswer = randomElement.split('_')[0];

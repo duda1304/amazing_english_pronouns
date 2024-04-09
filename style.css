@@ -112,8 +112,9 @@ body {
 
 .memory-game-image {
   height: 50%;
-  margin-top: 20%;
+  margin-top: 25%;
   object-fit: contain;
+  width: 80%;
 }
 
 /* activity 01 */
@@ -159,14 +160,20 @@ body {
   max-width: 250px; */
 }
 
-.activity1-3to6 {
+.activity1-3to6, .correct-incorrect-card {
   background-color: #D8EFF9;
   border: 2px solid #5A9DE9;
-  border-radius: 20px;
+  border-radius: 10px;
   height: 20vh;
-  margin-top: 2rem;
+  min-height: 135px;
+  min-width: 115px;
+  width: 100%;
+}
+
+.activity1-3to6 img, .correct-incorrect-card img {
   width: auto;
 }
+
 
 .container-right {
   float: right;
@@ -206,6 +213,7 @@ figure {
   width: fit-content;
   margin-left: 6vw; */
   width: 80%;
+  margin-left: 10%;
 }
 
 #proposed_answers div {
@@ -261,8 +269,9 @@ figure {
 
 /* activity 3 */
 .white-circle {
-  width: 25px;
-  height: 25px;
+  padding: 1px;
+  width: 30px;
+  height: 30px;
   background-color: white;
   position: absolute;
   top: 3%;
@@ -270,6 +279,7 @@ figure {
   font-family: "Caveat Brush", cursive;
   font-weight: 400;
   font-style: normal;
+  text-transform: capitalize;
 }
 
 
@@ -316,22 +326,19 @@ figure {
   width: 75px;
 }
 
-.activity4-3to6 {
+.activity4-3to6, .drag-and-drop-card, .secret-code-card {
   background-color: #D8EFF9;
   border: 2px solid #5A9DE9;
   border-radius: 10px;
   height: 20vh;
   min-height: 125px;
-  /* margin-top: 2rem; */
   width: 100%;
 }
 
-.activity4-3to6 img {
-  /* max-height: 100%; */
-  /* max-width: 100%; */
-  /* height: 80%; */
+.activity4-3to6 img, .drag-and-drop-card img, .secret-code-card img {
   width: auto;
 }
+
 
 .form-control {
   /* width: 100px; */

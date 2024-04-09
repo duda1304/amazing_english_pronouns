@@ -114,7 +114,7 @@ $(document).ready(function () {
        shuffled.forEach(element => {
             $('.secret-code-cards').append(`
             <div class="col align-items-center d-flex flex-column p-0 m-2" style="min-width: 20%;">
-                <div class="activity4-3to6 d-flex justify-content-center align-items-center p-2">
+                <div class="secret-code-card d-flex justify-content-center align-items-center p-2">
                     <img src="./media/${dir}/${element}" alt="Image" class="responsive-img">
                 </div>
                 <div class="btn-379 btn-white-red btn m-2 px-2 proposed_part_of_code" data-correct="${element.split('_')[0] === correctAnswer ? 'true' : 'false'}">${Math.floor(Math.random() * 9) + 1}</div>

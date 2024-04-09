@@ -53,7 +53,7 @@ $(document).ready(function () {
             $(this).text(proposedAnswers.shift());
         })
     }
-   
+
     function render() {
         randomElement = pickAndRemoveRandomElement(images);
         correctAnswer = randomElement.split('_')[0];
@@ -124,9 +124,11 @@ $(document).ready(function () {
         } else {
             if (width/height >= 1.5) {
                 this.style.height = "40%";
-            } else if (width/height >= 1.2) {
-                this.style.height = "60%";
-            } else {
+            } 
+            // else if (width/height >= 1.2) {
+            //     this.style.height = "60%";
+            // } 
+            else {
                 this.style.height = "80%";
             }
         }

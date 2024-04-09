@@ -17,7 +17,7 @@ $(document).ready(function () {
 		'you_1' : 'tu',
 		'he_1' : 'il',
 		'she_1' : 'elle',
-		'it_1' : 'elle',
+		'it_1' : 'les choses et les animaux non familiers',
 		'we_1' : 'nous',
 		'you_2' : 'vous',
 		'they_1' : 'ils',
@@ -59,7 +59,7 @@ $(document).ready(function () {
 	function createMemoryCard(index) {
 		return (`<div class="col-2">
 					<div class="memory-card card-image" data-index="${index}">
-						<img src="" class="memory-game-image"></img>
+						<img src="./media/transparent.png" class="memory-game-image"></img>
 						<p></p>
 					</div>
 				</div>`);
