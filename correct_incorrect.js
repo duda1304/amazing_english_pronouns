@@ -1,15 +1,33 @@
 $(document).ready(function () {
 
     const pronouns = ['i', 'you', 'he', 'she', 'it', 'we', 'they'];
-    const number_of_images = {
-        'i' : 3,
-        'you' : 4,
-        'he' : 5,
-        'she' : 7,
-        'it' : 11,
-        'we' : 4,
-        'they' : 2
-    };
+    let number_of_images;
+    let folder;
+
+    if (localStorage.getItem('age') == '1') {
+        number_of_images = {
+            'i' : 3,
+            'you' : 4,
+            'he' : 5,
+            'she' : 7,
+            'it' : 11,
+            'we' : 4,
+            'they' : 2
+        }
+        folder = '1_3';
+    } else {
+        number_of_images = {
+            'i' : 2,
+            'you' : 5,
+            'he' : 5,
+            'she' : 5,
+            'it' : 10,
+            'we' : 7,
+            'they' : 2
+        }
+        folder = '2_1';
+    }
+
     const possibleAnswersBoolean = ['correct', 'incorrect'];
 
     function imageFileNames(pronouns, number_of_images) {
@@ -34,9 +52,13 @@ $(document).ready(function () {
         let randomIndex = Math.floor(Math.random() * possibleAnswersBoolean.length);
 
         correct_incorrect = possibleAnswersBoolean[randomIndex];
-        if (possibleAnswersBoolean[randomIndex] === 'correct') {
+        if (correct_incorrect === 'correct') {
             proposedAnswer = correctAnswer;
         } else {
+            let indexOfCorrect = arr.indexOf(correctAnswer);
+            if (indexOfCorrect !== -1) {
+                arr.splice(indexOfCorrect, 1);
+            }
             let randomIndex = Math.floor(Math.random() * arr.length);
             proposedAnswer = arr[randomIndex];
         }
@@ -59,7 +81,7 @@ $(document).ready(function () {
     function render() {
         randomElement = pickAndRemoveRandomElement(images);
         correctAnswer = randomElement.split('_')[0];
-        document.querySelector('.container-right img:not(.audio-icon)').src = `media/1_3/${randomElement}`;
+        document.querySelector('.container-right img:not(.audio-icon)').src = `media/${folder}/${randomElement}`;
         renderProposedAnswers('.white-circle', pronouns, correctAnswer);
     }
 
@@ -97,6 +119,8 @@ $(document).ready(function () {
         const width = this.naturalWidth;
         const height = this.naturalHeight;
 
+        $('.rounded-circle')[0].style.left = "3%";
+
         if (this.src.includes('i_') || this.src.includes('he_') || this.src.includes('she_')) {
             this.style.height = "100%";
             this.style.marginTop = "0%";
@@ -122,6 +146,7 @@ $(document).ready(function () {
         }
 
         if (this.src.includes('you_') || this.src.includes('they_') || this.src.includes('we_')) {
+            console.log("mistake")
             $('.rounded-circle')[0].style.left = "40%";
             this.style.marginLeft = "0%";
             // this.style.marginTop = "25%";
