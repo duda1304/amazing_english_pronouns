@@ -438,6 +438,8 @@ figure {
   width: 100%;
 }
 
+
+
 .story input {
   text-align: center;
 }
@@ -488,6 +490,11 @@ figure {
 
   .bottom-text-31012 {
     height: 50% !important;
+  }
+
+  .story {
+    background: linear-gradient(to bottom, transparent, white);
+    padding: 5px;
   }
 
   .story-game .container-left {

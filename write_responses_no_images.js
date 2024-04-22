@@ -177,14 +177,19 @@ $(document).ready(async function () {
         }
     }
 
+    /// CHANGED TO IF 8 out of 10 FILLED
     function checkIfAllFilled() {
-        let allFilled = true;
+        let allFilled = false;
+        let count = 0;
         $('.story input').each(function() {
-            if ($(this).val().trim() === '') {
-                allFilled = false;
-                return;
+            if ($(this).val().trim() !== '') {
+                count += 1;
             }
         });
+
+        if (count >= 8) {
+            allFilled = true;
+        }
         return allFilled;
     }
 
