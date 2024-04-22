@@ -93,11 +93,20 @@ $(document).ready(function () {
     $('div[data-answer="correct"], div[data-answer="incorrect"]').on('click', checkAnswer);
    
     $(".container-right img").on('load', function() {
+        console.log("sdsa");
         const width = this.naturalWidth;
         const height = this.naturalHeight;
-    
-        if (height/width >= 1.5) {
+
+        if (this.src.includes('i_') || this.src.includes('he_') || this.src.includes('she_')) {
+            this.style.height = "100%";
+            this.style.marginTop = "0%";
+            this.style.marginLeft = "10px";
+        }
+        
+       
+        else if (height/width >= 1.5) {
             this.style.height = "90%";
+
         } else if (height === width) {
             this.style.height = "40%";
         } else {
@@ -106,9 +115,26 @@ $(document).ready(function () {
             } else if (width/height >= 1.2) {
                 this.style.height = "60%";
             } else {
-                this.style.height = "80%";
+                this.style.height = "90%";
+                // this.style.marginLeft = "20%";
+                this.style.marginTop = "20%";
             }
         }
+
+        if (this.src.includes('you_') || this.src.includes('they_') || this.src.includes('we_')) {
+            $('.rounded-circle')[0].style.left = "40%";
+            this.style.marginLeft = "0%";
+            // this.style.marginTop = "25%";
+            this.style.marginTop = "max(18%, 35px)";
+            this.style.height = "80%";
+        } 
+
+        if (this.src.includes('it_4') || this.src.includes('it_5')) {
+            this.style.height = "60%";
+            this.style.marginLeft = "0%";
+            this.style.marginTop = "20%";
+        }
+    
     });
     
 });

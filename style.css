@@ -160,13 +160,25 @@ body {
   max-width: 250px; */
 }
 
-.activity1-3to6, .correct-incorrect-card {
+/* .activity1-3to6 {
   background-color: #D8EFF9;
   border: 2px solid #5A9DE9;
   border-radius: 10px;
   height: 20vh;
   min-height: 135px;
   min-width: 115px;
+  width: 100%;
+} */
+
+.activity1-3to6, .correct-incorrect-card {
+  background-color: #D8EFF9;
+  border: 2px solid #5A9DE9;
+  border-radius: 10px;
+  height: 30vh;
+  min-height: 135px;
+  max-height: 225px;
+  /* min-width: 115px; */
+  min-width: min(17vw, 175px);
   width: 100%;
 }
 
@@ -183,7 +195,8 @@ body {
   /* height: 70%; */
   overflow: hidden;
   padding-right: 2%;
-  padding-left: 5%;
+  /* padding-left: 5%; */
+  padding-left: 3%;
 }
 
 .container-right>div:first-of-type {
@@ -194,7 +207,7 @@ body {
   color: #00A864;
   /* font-size: max(min(1vw, 26px), 20px); */
   font-size: max(min(1.6vw, 20px), 12px);
-  font-style: normal;
+  /* font-style: normal; */
   font-weight: 700;
   line-height: normal;
 }
@@ -205,7 +218,7 @@ body {
   font-size: max(min(1.4vw, 18px), 11px);
   font-style: italic;
   font-weight: 400;
-  line-height: 20px;
+  /* line-height: 20px; */
 }
 
 figure {
@@ -270,8 +283,8 @@ figure {
 /* activity 3 */
 .white-circle {
   padding: 1px;
-  width: 30px;
-  height: 30px;
+  /* width: 30px;
+  height: 30px; */
   background-color: white;
   position: absolute;
   top: 3%;
@@ -280,6 +293,13 @@ figure {
   font-weight: 400;
   font-style: normal;
   text-transform: capitalize;
+  width: max(3vw, 30px);
+  max-width: 37px;
+  height: max(3vw, 30px);
+  max-height: 37px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 
