@@ -21,9 +21,18 @@ $(document).ready(function () {
         return shuffleArray(fileNames);
     }    
    
-    function pickAndRemoveRandomElement(arr) {
-        const randomIndex = Math.floor(Math.random() * arr.length);
-        const removedElement = arr.splice(randomIndex, 1)[0];
+    function pickAndRemoveRandomElement(arr, exclude) {
+        let found  = false;
+        console.log("sadsdsad")
+        let removedElement;
+        while (found === false) {
+            let randomIndex = Math.floor(Math.random() * arr.length);
+            let randomElement = arr[randomIndex];
+            if (exclude.includes(randomElement.split('_')[0]) === false) {
+                removedElement = arr.splice(randomIndex, 1)[0];
+                found = true;
+            }
+        }
         return removedElement;
     };
 
@@ -39,9 +48,12 @@ $(document).ready(function () {
         let count = 0;
 
         let answers = [];
+        let exclude = [];
         while (count <= 3) {
-            let randomElement = pickAndRemoveRandomElement(images);
+            let randomElement = pickAndRemoveRandomElement(images, exclude);
+            
             document.querySelectorAll('.container-right img:not(.audio-icon)')[count].src = `media/1_4/${randomElement}`;
+            exclude.push(randomElement.split('_')[0]);
             answers.push(randomElement.split('_')[0]);
             count += 1;
         }
@@ -87,9 +99,11 @@ $(document).ready(function () {
         if ($(event.currentTarget).find('input').val() === '') {
             const data = event.originalEvent.dataTransfer.getData("text");
             $(event.currentTarget).find('input').val(data);
-    
+
             const identifier = event.originalEvent.dataTransfer.getData("identifier");
-            $(`#${identifier}`).css('visibility', 'hidden');
+            $(`#${identifier}`).css('opacity', '0.6');
+            $(`#${identifier}`).attr('draggable', 'false');
+            $(event.currentTarget).find('input').data('answer_id', identifier);
     
             count += 1;
             if (count === $('.container-right img').length) {
@@ -97,8 +111,17 @@ $(document).ready(function () {
                 checkResponses();
             }
         } else {
-            return
-        }        
+            const data = event.originalEvent.dataTransfer.getData("text");
+            $(event.currentTarget).find('input').val(data);
+            const identifier = event.originalEvent.dataTransfer.getData("identifier");
+
+            $(`#${$(event.currentTarget).find('input').data('answer_id')}`).css('opacity', '1');
+            $(`#${$(event.currentTarget).find('input').data('answer_id')}`).attr('draggable', 'true');
+
+            $(event.currentTarget).find('input').data('answer_id', identifier);
+            $(`#${identifier}`).css('opacity', '0.6');
+            $(`#${identifier}`).attr('draggable', 'false');
+        }
     });
 
     let countCorrect = 0;
@@ -123,7 +146,8 @@ $(document).ready(function () {
                     $('.match-game-column input').each(function() {
                         $(this).removeClass('correct animate__animated animate__bounce animate__slow incorrect animate__animated animate__shakeX')
                     });
-                    $('#proposed_answers div').css('visibility', '');
+                    $('#proposed_answers div').css('opacity', '1');
+                    $('#proposed_answers div').attr('draggable', 'true');
                     $('.match-game-column input').val('');
                     render();
                 }, 2000);
@@ -137,7 +161,8 @@ $(document).ready(function () {
                     $('.match-game-column input').each(function() {
                         $(this).removeClass('correct animate__animated animate__bounce animate__slow incorrect animate__animated animate__shakeX')
                     });
-                    $('#proposed_answers div').css('visibility', '');
+                    $('#proposed_answers div').css('opacity', '1');
+                    $('#proposed_answers div').attr('draggable', 'true');
                     $('.match-game-column input').val('');
                 }, 2000);
             } else {
@@ -148,7 +173,8 @@ $(document).ready(function () {
                         $('.match-game-column input').each(function() {
                             $(this).removeClass('correct animate__animated animate__bounce animate__slow incorrect animate__animated animate__shakeX')
                         });
-                        $('#proposed_answers div').css('visibility', '');
+                        $('#proposed_answers div').css('opacity', '1');
+                        $('#proposed_answers div').attr('draggable', 'true');
                         $('.match-game-column input').val('');
                         render();
                     }, 2000);
