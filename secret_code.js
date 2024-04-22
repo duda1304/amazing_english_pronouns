@@ -7,12 +7,12 @@ $(document).ready(function () {
     if (localStorage.getItem('age') == '2') {
         number_of_images = {
             'i' : 2,
-            'you' : 5,
+            'you' : 4,
             'he' : 4,
             'she' : 7,
             'it' : 5,
             'we' : 4,
-            'they' : 3
+            'they' : 4
         };
         dir = '2_3';
     } else {
@@ -201,26 +201,58 @@ $(document).ready(function () {
         }
     }
 
+    const sizes = {
+        'it_1' : '50%',
+        'it_2' : '70%',
+        'it_3' : '50%',
+        'it_4' : '50%',
+        'it_5' : '60%'
+    }
+
     function setImageSizes() {
         $(".container-right img").on('load', function() {
+            console.log(this.src);
             const width = this.naturalWidth;
             const height = this.naturalHeight;
-        
-            if (height/width >= 1.5) {
+
+            if (this.src.includes('i_')) {
                 this.style.height = "90%";
-            } else if (height === width) {
-                this.style.height = "40%";
+            } else if (this.src.includes('he_') || this.src.includes('she_')) {
+                this.style.height = "90%";
+            } else if (this.src.includes('you_') || this.src.includes('they_') || this.src.includes('we_')) {
+                this.style.height = "90%";
             } else {
-                if (width/height >= 1.5) {
-                    this.style.height = "40%";
-                } else if (width/height >= 1.2) {
-                    this.style.height = "60%";
-                } else {
-                    this.style.height = "80%";
-                }
+                this.style.height = sizes[this.src.split('/')[this.src.split('/').length -1].split('.')[0]];
             }
+
+            // if (this.src.includes('they_3')) {
+            //     this.style.height = '70%';
+            // }
         });
     }
+
+    $('#proposed_answer > div').css('text-transform', 'capitalize');
+    
+    // function setImageSizes() {
+    //     $(".container-right img").on('load', function() {
+    //         const width = this.naturalWidth;
+    //         const height = this.naturalHeight;
+        
+    //         if (height/width >= 1.5) {
+    //             this.style.height = "90%";
+    //         } else if (height === width) {
+    //             this.style.height = "40%";
+    //         } else {
+    //             if (width/height >= 1.5) {
+    //                 this.style.height = "40%";
+    //             } else if (width/height >= 1.2) {
+    //                 this.style.height = "60%";
+    //             } else {
+    //                 this.style.height = "80%";
+    //             }
+    //         }
+    //     });
+    // }
 
     setImageSizes();
   
