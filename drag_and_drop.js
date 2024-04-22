@@ -183,25 +183,69 @@ $(document).ready(function () {
         }
     }
 
+    // $(".container-right img").on('load', function() {
+    //     const width = this.naturalWidth;
+    //     const height = this.naturalHeight;
+    
+    //     if (height/width >= 1.5) {
+    //         this.style.height = "90%";
+    //     } else if (height === width) {
+    //         this.style.height = "40%";
+    //     } else {
+    //         if (width/height >= 1.5) {
+    //             this.style.height = "40%";
+    //         } else if (width/height >= 1.2) {
+    //             this.style.height = "60%";
+    //         } else {
+    //             this.style.height = "80%";
+    //         }
+    //     }
+    // });
+    
+    const sizes = {
+        'it_1' : '30%',
+        'it_2' : '70%',
+        'it_3' : '50%',
+        'it_4' : '40%',
+        'it_5' : '50%',
+        'it_6' : '80%',
+        'it_7' : '60%',
+        'it_8' : '70%',
+        'it_9' : '70%',
+        'it_10' : '30%',
+        'it_11' : '40%',
+        'it_12' : '80%',
+        'it_13' : '40%',
+        'it_14' : '60%',
+        'it_15' : '50%',
+        'it_16' : '70%',
+        'it_17' : '60%',
+        'it_18' : '60%',
+        'it_19' : '70%',
+        'it_20' : '70%',
+        'it_21' : '70%',
+        'it_22' : '70%'
+    }
+
     $(".container-right img").on('load', function() {
+        console.log(this.src);
         const width = this.naturalWidth;
         const height = this.naturalHeight;
-    
-        if (height/width >= 1.5) {
+
+        if (this.src.includes('i_')) {
             this.style.height = "90%";
-        } else if (height === width) {
-            this.style.height = "40%";
+        } else if (this.src.includes('he_') || this.src.includes('she_')) {
+            this.style.height = "90%";
+        } else if (this.src.includes('you_') || this.src.includes('they_') || this.src.includes('we_')) {
+            this.style.height = "90%";
         } else {
-            if (width/height >= 1.5) {
-                this.style.height = "40%";
-            } else if (width/height >= 1.2) {
-                this.style.height = "60%";
-            } else {
-                this.style.height = "80%";
-            }
+            this.style.height = sizes[this.src.split('/')[this.src.split('/').length -1].split('.')[0]];
+        }
+
+        if (this.src.includes('they_3')) {
+            this.style.height = '70%';
         }
     });
-    
-   
+
 });
 
