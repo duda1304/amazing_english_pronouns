@@ -201,7 +201,7 @@ $(document).ready(async function () {
         console.log("check responses");
         $('.story input').attr('disabled', true);
         $('.story input').each(function() {
-            if ($(this).val().trim() === $(this).data('answer').trim()) {
+            if ($(this).val().trim().toLowerCase() === $(this).data('answer').trim()) {
                 $(this).addClass('correct animate__animated animate__bounce animate__slow');
             } else {
                 $(this).addClass('incorrect animate__animated animate__shakeX animate__slow');
