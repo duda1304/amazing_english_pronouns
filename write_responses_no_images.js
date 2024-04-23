@@ -198,6 +198,7 @@ $(document).ready(async function () {
 	});
 
     function checkResponses() {
+        console.log("check responses");
         $('.story input').attr('disabled', true);
         $('.story input').each(function() {
             if ($(this).val().trim() === $(this).data('answer').trim()) {
