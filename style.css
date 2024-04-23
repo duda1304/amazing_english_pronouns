@@ -378,7 +378,8 @@ figure {
 
 .btn-379,
 .btn-379:hover,
-.btn-379:active {
+.btn-379:active,
+.btn-379:disabled {
   font-family: 'Open Sans', sans-serif;
   color: #524961;
   background-color: white;
