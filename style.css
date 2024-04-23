@@ -366,6 +366,10 @@ figure {
   text-align: center;
 }
 
+.story > input {
+  width: auto;
+}
+
 .form-control:disabled {
   background-color: white;
 }
@@ -382,20 +386,17 @@ figure {
 .btn-379:disabled {
   font-family: 'Open Sans', sans-serif;
   color: #524961;
+  text-align: center;
   background-color: white;
   border-radius: 6px;
   border-width: 1.5px;
   border-style: solid;
   font-size: max(min(1.2vw, 15px), 10px);
-  /* padding: 0.75rem 0.5rem; */
   padding: 0.5rem;
   display: flex;
   justify-content: center;
   width: min(100px, 10vw);
   opacity: 1;
-  /* max-width: 10vw; */
-  /* width: 80%;
-  max-width: 100px; */
 }
 
 .btn-white-blue,
@@ -444,6 +445,7 @@ figure {
 
 .story input {
   text-align: center;
+  font-size: max(min(1.2vw, 20px), 10px);
 }
 
 .volume-blue {
@@ -452,12 +454,12 @@ figure {
 
 .english-479 {
   font-weight: bold;
-  font-size: max(min(1.6vw, 20px), 12px);
+  font-size: max(min(1.2vw, 20px), 10px);
 }
 
 .french-479 {
   font-style: italic;
-  font-size: max(min(1.4vw, 18px), 11px);
+  font-size: max(min(1.0vw, 18px), 9px);
 }
 
 /* activity 3 (10 -12) */

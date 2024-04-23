@@ -105,6 +105,9 @@ $(document).ready(function () {
         return array;
     }
 
+    let allNumbersArray = [1,2,3,4,5,6,7,8,9];
+    let codeArray = [];
+
     function render() {
         let randomElement = pickAndRemoveRandomElement(compiledPages);
         let correctAnswer = randomElement[0].split('_')[0];
@@ -112,15 +115,19 @@ $(document).ready(function () {
 
        let shuffled = shuffleArray(shuffleArray(shuffleArray(randomElement)));
        shuffled.forEach(element => {
+            let randomNumber = pickAndRemoveRandomElement(allNumbersArray);
+            if (element.split('_')[0] === correctAnswer) {
+                codeArray.push(randomNumber);
+            }
+            
             $('.secret-code-cards').append(`
             <div class="col align-items-center d-flex flex-column p-0 m-2" style="min-width: 20%;">
                 <div class="secret-code-card d-flex justify-content-center align-items-center p-2">
                     <img src="./media/${dir}/${element}" alt="Image" class="responsive-img">
                 </div>
-                <div class="btn-379 btn-white-red btn m-2 px-2 proposed_part_of_code" data-correct="${element.split('_')[0] === correctAnswer ? 'true' : 'false'}">${Math.floor(Math.random() * 9) + 1}</div>
+                <div class="btn-379 btn-white-red btn m-2 px-2 proposed_part_of_code">${randomNumber}</div>
             </div>`);
        });
-        
        const codeLength = parseInt(localStorage.getItem('age'));
        for (let i = 1; i <= codeLength; i++) {
         $('.secret-code').next().append(`
@@ -177,23 +184,24 @@ $(document).ready(function () {
         const elements = $('.proposed_part_of_code').filter(function() {
             return $(this).data('selected') === 'true';
         });
-        console.log('sad');
-        elements.each(function(index,value) {
-            if ($(this).data('correct') === true && $($('input:text')[index]).val() === $(this).text()) {
-                $($('input:text')[index]).addClass('correct animate__animated animate__bounce animate__slow');
+
+        $('input').each(function() {
+            if (codeArray.includes(parseInt($(this).val()))) {
+                $(this).addClass('correct animate__animated animate__bounce animate__slow');
             } else {
-                $($('input:text')[index]).addClass('incorrect animate__animated animate__shakeX animate__slow');
+                $(this).addClass('incorrect animate__animated animate__shakeX animate__slow');
             }
         });
-        console.log(compiledPages);
+
         if (compiledPages.length > 0) {
             setTimeout(() => {
                 $('input:text').removeClass('correct animate__animated animate__bounce animate__slow incorrect animate__animated animate__shakeX');
                 $('input:text').val('');
                 $('.proposed_part_of_code').removeData('selected');
-                $('.proposed_part_of_code').removeData('correct');
                 $('.secret-code-cards').empty();
                 $('.secret-code').next().empty();
+                allNumbersArray = [1,2,3,4,5,6,7,8,9];
+                codeArray = [];
                 render();
                 setImageSizes();
                 $('.proposed_part_of_code').on('click', handleClick);
