@@ -392,6 +392,7 @@ figure {
   display: flex;
   justify-content: center;
   width: min(100px, 10vw);
+  opacity: 1;
   /* max-width: 10vw; */
   /* width: 80%;
   max-width: 100px; */
