@@ -86,21 +86,27 @@ $(document).ready(function () {
     $('#proposed_answers div').attr('draggable', 'true');
 
 
+    let text = '';
+    let identifier = '';
+
     $('#proposed_answers div').on('dragstart', function(event) {
-        event.originalEvent.dataTransfer.setData("text", $(this).text().toUpperCase()); 
-        const identifier = generateRandomString(10);
-        $(this).attr('id', identifier);
-        event.originalEvent.dataTransfer.setData("identifier", identifier);
+        // event.originalEvent.dataTransfer.setData("text", $(this).text().toUpperCase()); 
+        text = $(this).text().toUpperCase();
+        const randomString = generateRandomString(10);
+        $(this).attr('id', randomString);
+        // event.originalEvent.dataTransfer.setData("identifier", randomString);
+        identifier = randomString;
     });
     
     let count = 0;
     $('.container-right .drop_box').on('drop', function(event) {
         event.preventDefault();
         if ($(event.currentTarget).find('input').val() === '') {
-            const data = event.originalEvent.dataTransfer.getData("text");
-            $(event.currentTarget).find('input').val(data);
+            // const data = event.originalEvent.dataTransfer.getData("text");
+            // $(event.currentTarget).find('input').val(data);
+            $(event.currentTarget).find('input').val(text);
 
-            const identifier = event.originalEvent.dataTransfer.getData("identifier");
+            // const identifier = event.originalEvent.dataTransfer.getData("identifier");
             $(`#${identifier}`).css('opacity', '0.1');
             $(`#${identifier}`).attr('draggable', 'false');
             $(event.currentTarget).find('input').data('answer_id', identifier);
@@ -111,9 +117,10 @@ $(document).ready(function () {
                 checkResponses();
             }
         } else {
-            const data = event.originalEvent.dataTransfer.getData("text");
-            $(event.currentTarget).find('input').val(data);
-            const identifier = event.originalEvent.dataTransfer.getData("identifier");
+            // const data = event.originalEvent.dataTransfer.getData("text");
+            // $(event.currentTarget).find('input').val(data);
+            $(event.currentTarget).find('input').val(text);
+            // const identifier = event.originalEvent.dataTransfer.getData("identifier");
 
             $(`#${$(event.currentTarget).find('input').data('answer_id')}`).css('opacity', '1');
             $(`#${$(event.currentTarget).find('input').data('answer_id')}`).attr('draggable', 'true');
