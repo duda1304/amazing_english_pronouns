@@ -88,13 +88,21 @@ body {
 
 .memory-card p {
   position: absolute;
-  bottom: 2%;
+  bottom: 8%;
   margin-bottom: 0px;
   color: white;
   font-weight: bold;
   text-transform: capitalize;
   font-size: max(min(1.6vw, 20px), 12px);
-  ;
+
+  text-align: center;
+    line-height: 0.5;
+  /* font-size: max(min(1vw, 14px), 10px); */
+}
+
+.memory-card.flipped small {
+  /* font-size: max(min(1vw, 8px), 8px); */
+  font-size: 1vw;
 }
 
 .card-image {
@@ -316,11 +324,11 @@ figure {
   }
 
   .write-responses-no-images .container-left {
-    width: 35%;
+    width: 30%;
   }
 
   .write-responses-no-images .container-right {
-    width: 65%;
+    width: 70%;
   }
 
   .drag-and-drop-card {
@@ -352,6 +360,21 @@ figure {
   min-height: 125px;
   width: 100%;
 }
+
+.secret-code-card {
+  width: fit-content;
+  min-width: 75px;
+  min-height: 125px;
+  /* margin-right: 10px; */
+}
+
+@media only screen and (max-width: 800px) {
+  .secret-code-card {
+    min-height: 100px;
+  }
+}
+
+
 
 .activity4-3to6 img, .drag-and-drop-card img, .secret-code-card img {
   width: auto;
@@ -445,7 +468,7 @@ figure {
 
 .story input {
   text-align: center;
-  font-size: max(min(1.2vw, 20px), 10px);
+  font-size: max(min(1.2vw, 18px), 10px);
 }
 
 .volume-blue {
@@ -454,12 +477,12 @@ figure {
 
 .english-479 {
   font-weight: bold;
-  font-size: max(min(1.2vw, 20px), 10px);
+  font-size: max(min(1.2vw, 18px), 10px);
 }
 
 .french-479 {
   font-style: italic;
-  font-size: max(min(1.0vw, 18px), 9px);
+  font-size: max(min(1.0vw, 16px), 9px);
 }
 
 /* activity 3 (10 -12) */
@@ -471,7 +494,7 @@ figure {
   left: 4%;
   font-weight: bold;
   z-index: 1;
-  font-size: 0.7em;
+  font-size: 0.85em;
   margin-bottom: 0px;
 }
 
@@ -480,11 +503,10 @@ figure {
   width: 100%;
   padding-top: 100%;
   background-color: white;
-  border-radius: 10% 10% 0% 0%;
+  border-radius: 8% 8% 0% 0%;
   overflow: hidden;
-  /* min-height: 125px; */
   min-height: 165px;
-  height: 25vh;
+  height: 30vh;
 }
 
 @media only screen and (max-width: 940px) {
@@ -492,21 +514,31 @@ figure {
     min-height: 200px;
   } */
 
-  .bottom-text-31012 {
-    height: 50% !important;
-  }
+  
 
-  .story {
+  .story-no-images {
     background: linear-gradient(to bottom, transparent, white);
     padding: 5px;
   }
 
+ 
+}
+
+@media only screen and (max-width: 1200px) {
+  .top-image-31012 {
+    height: 55% !important;
+  }
+
+  .bottom-text-31012 {
+    height: 45% !important;
+  }
+
   .story-game .container-left {
-    width: 35%;
+    width: 30%;
   }
 
   .story-game .container-right {
-    width: 65%;
+    width: 70%;
   }
 }
 
@@ -538,10 +570,10 @@ figure {
   left: 0;
   width: 100%;
   /* height: fit-content; */
-  height: 45%;
-  min-height: 65px;
+  height: 36%;
+
+  /* min-height: 65px; */
   background-color: #E2EEFF;
-  /* padding: 5% 5%; */
   box-sizing: border-box;
   text-align: center;
 }
@@ -566,8 +598,7 @@ figure {
 .bottom-french-31012 {
   color: #524961;
   font-style: italic;
-  font-size: max(min(1.1vw, 11px), 8px);
-  /* font-size: 0.5rem; */
+  font-size: max(min(1.1vw, 11px), 7px);
   margin-bottom: 0px;
 }
 

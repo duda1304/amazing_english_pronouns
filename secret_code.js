@@ -121,8 +121,8 @@ $(document).ready(function () {
             }
             
             $('.secret-code-cards').append(`
-            <div class="col align-items-center d-flex flex-column p-0 m-2" style="min-width: 20%;">
-                <div class="secret-code-card d-flex justify-content-center align-items-center p-2">
+            <div class="align-items-center d-flex flex-column p-0 m-1 m-md-2" style="width: fit-content;">
+                <div class="secret-code-card d-flex justify-content-center align-items-center p-1 p-md-2">
                     <img src="./media/${dir}/${element}" alt="Image" class="responsive-img">
                 </div>
                 <div class="btn-379 btn-white-red btn m-2 px-2 proposed_part_of_code">${randomNumber}</div>
@@ -150,7 +150,7 @@ $(document).ready(function () {
             proposalCount = 3;
         } else {
             arraysLength = 4;
-            proposalCount = 5;
+            proposalCount = 4;
         }
         compiledPages = compilePages(parseInt(localStorage.getItem('age')), proposalCount);
         correctLength = checkLengths(compiledPages, arraysLength);
@@ -209,12 +209,31 @@ $(document).ready(function () {
         }
     }
 
-    const sizes = {
-        'it_1' : '50%',
-        'it_2' : '70%',
-        'it_3' : '50%',
-        'it_4' : '50%',
-        'it_5' : '60%'
+    let sizes;
+
+    if (localStorage.getItem('age') == '2') {
+        sizes = {
+            'it_1' : '50%',
+            'it_2' : '70%',
+            'it_3' : '50%',
+            'it_4' : '50%',
+            'it_5' : '60%'
+        }
+    } else {
+        sizes = {
+            'it_1' : '50%',
+            'it_2' : '70%',
+            'it_3' : '50%',
+            'it_4' : '60%',
+            'it_5' : '50%',
+            'it_6' : '60%',
+            'it_7' : '60%',
+            'it_8' : '40%',
+            'it_9' : '50%',
+            'it_10' : '50%',
+            'it_11' : '50%',
+            'it_12' : '50%',
+        }
     }
 
     function setImageSizes() {
@@ -228,14 +247,10 @@ $(document).ready(function () {
             } else if (this.src.includes('he_') || this.src.includes('she_')) {
                 this.style.height = "90%";
             } else if (this.src.includes('you_') || this.src.includes('they_') || this.src.includes('we_')) {
-                this.style.height = "90%";
+                this.style.height = "80%";
             } else {
                 this.style.height = sizes[this.src.split('/')[this.src.split('/').length -1].split('.')[0]];
             }
-
-            // if (this.src.includes('they_3')) {
-            //     this.style.height = '70%';
-            // }
         });
     }
 

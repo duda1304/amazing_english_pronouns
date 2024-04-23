@@ -208,7 +208,7 @@ $(document).ready(async function () {
         {
             '7' : [
                 {
-                    'en' : 'his is my brother, Gary. $input is the best!',
+                    'en' : 'This is my brother, Gary. $input is the best!',
                     'fr' : 'Voici mon frère, Gary. C’est le meilleur!',
                     'answer': 'he'
                 },
@@ -329,28 +329,39 @@ $(document).ready(async function () {
 		checkResponses();
 	});
 
+    $('button:contains("next")').on('click', function() {
+        renderNext();
+    });
+
     function checkResponses() {
         $('.story input').attr('disabled', true);
         $('.story input').each(function() {
-            if ($(this).val().trim() === $(this).data('answer').trim()) {
+            if ($(this).val().trim().toLowerCase() === $(this).data('answer').trim()) {
                 $(this).addClass('correct animate__animated animate__bounce animate__slow');
             } else {
                 $(this).addClass('incorrect animate__animated animate__shakeX animate__slow');
             }
         });
 
+        $('button:contains("listen")').removeAttr('disabled');
+        $('button:contains("next")').show();
+        $('button:contains("check")').hide();
+    }
+
+    function renderNext() {
         if (data.length > 0) {
-            setTimeout(() => {
-                $('.story').children(':first-child').empty();
-                $('.story').children(':nth-child(2)').empty();
-                $('button:contains("check")').attr('disabled', 'disabled');
-                if ($('audio').length !== 0) {
-                    $('audio')[0].pause();
-                }
-                render();
-                $('.story input').on('input', checkValue);
-            }, 2000);
-        } 
+            $('.story').children(':first-child').empty();
+            $('.story').children(':nth-child(2)').empty();
+            $('button:contains("check")').show();
+            $('button:contains("check")').attr('disabled', 'disabled');
+            $('button:contains("listen")').attr('disabled', 'disabled');
+            $('button:contains("next")').hide();
+            if ($('audio').length !== 0) {
+                $('audio')[0].pause();
+            }
+            render();
+            $('.story input').on('input', checkValue);
+        }
     }
 
 });

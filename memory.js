@@ -17,7 +17,7 @@ $(document).ready(function () {
 		'you_1' : 'tu',
 		'he_1' : 'il',
 		'she_1' : 'elle',
-		'it_1' : 'les choses et les animaux non familiers',
+		'it_1' : '<small>choses<br> et animaux</small>',
 		'we_1' : 'nous',
 		'you_2' : 'vous',
 		'they_1' : 'ils',
@@ -81,7 +81,8 @@ $(document).ready(function () {
 	function flipCard($card, index) {
 		$card.css('background-image', "url('./media/memory-front.png')");
 		$card.find('.memory-game-image').attr('src', `./media/1_2/${images[index]['src']}`);
-		$card.find('p').text(images[index]['text']);
+		/////
+		$card.find('p').html(images[index]['text']);
 		$card.addClass("flipped");
 		flippedCount++;
 		flippedCards.push($card);
@@ -90,7 +91,7 @@ $(document).ready(function () {
 	function resetFlippedCards() {
 		flippedCards.forEach(function (card) {
 			card.find('.memory-game-image').attr('src', './media/transparent.png');
-			card.find('p').text('');
+			card.find('p').html('');
 			card.css('background-image', "url('./media/memory-backside.png')");
 			// card.find('img[src*="backside"]').show();
 			// card.find('img[src*="front"]').hide();
