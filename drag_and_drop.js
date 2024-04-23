@@ -90,7 +90,7 @@ $(document).ready(function () {
     let identifier = '';
 
     $('#proposed_answers div').on('dragstart', function(event) {
-        // event.originalEvent.dataTransfer.setData("text", $(this).text().toUpperCase()); 
+        event.originalEvent.dataTransfer.setData("text", $(this).text().toUpperCase()); 
         text = $(this).text().toUpperCase();
         const randomString = generateRandomString(10);
         $(this).attr('id', randomString);
