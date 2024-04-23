@@ -101,7 +101,7 @@ $(document).ready(function () {
             $(event.currentTarget).find('input').val(data);
 
             const identifier = event.originalEvent.dataTransfer.getData("identifier");
-            $(`#${identifier}`).css('opacity', '0');
+            $(`#${identifier}`).css('opacity', '0.1');
             $(`#${identifier}`).attr('draggable', 'false');
             $(event.currentTarget).find('input').data('answer_id', identifier);
     
@@ -119,7 +119,7 @@ $(document).ready(function () {
             $(`#${$(event.currentTarget).find('input').data('answer_id')}`).attr('draggable', 'true');
 
             $(event.currentTarget).find('input').data('answer_id', identifier);
-            $(`#${identifier}`).css('opacity', '0');
+            $(`#${identifier}`).css('opacity', '0.1');
             $(`#${identifier}`).attr('draggable', 'false');
         }
     });
