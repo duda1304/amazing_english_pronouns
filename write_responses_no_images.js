@@ -127,29 +127,53 @@ $(document).ready(async function () {
         let textData = data[localStorage.getItem('age')][localStorage.getItem('activity')].shift();
         let keys = Object.keys(textData);
         for (let i = 0; i < 5; i++) {
-            $('.story').children(':first-child').append(`
-            <div class="row mb-2">
-                <div class="col-9 pe-1 pe-md-2">
-                    <div class="english-479">${keys[i].split('(')[0].trim()} <i class="fas fa-volume-up volume-blue"></i></div>
-                    <div class="french-479" style="${keys[i].split('(').length > 1 ? '' : 'color: transparent;'}">${keys[i].split('(').length > 1 ? '(' + keys[i].split('(')[1].trim() : 'placeholder'}</div>
-                </div>
-                <div class="col-3 p-0 p-md-2">
-                    <input type="text" class="form-control d-inline-block btn-white-blue m-0 w-100" data-answer="${textData[keys[i]]}"></input>
-                </div>
-            </div>`)
+            $('.story').children(':first-child').append(`<div class="row mb-2 p-0">
+                                    <div class="col-6">
+                                        <div class="row">
+                                            <div class="col-9 pe-1 pe-md-2">
+                                                <div class="english-479">${keys[i].split('(')[0].trim()} <i class="fas fa-volume-up volume-blue"></i></div>
+                                                <div class="french-479" style="${keys[i].split('(').length > 1 ? '' : 'color: transparent;'}">${keys[i].split('(').length > 1 ? '(' + keys[i].split('(')[1].trim() : 'placeholder'}</div>
+                                            </div>
+                                            <div class="col-3 p-0 p-md-2">
+                                                <input type="text" class="form-control d-inline-block btn-white-blue m-0 w-100" data-answer="${textData[keys[i]]}"></input>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="row">
+                                            <div class="col-9 pe-1 pe-md-2">
+                                                <div class="english-479">${keys[i+5].split('(')[0].trim()} <i class="fas fa-volume-up volume-blue"></i></div>
+                                                <div class="french-479" style="${keys[i+5].split('(').length > 1 ? '' : 'color: transparent;'}">${keys[i+5].split('(').length > 1 ? '(' + keys[i+5].split('(')[1].trim() : 'placeholder'}</div>
+                                            </div>
+                                            <div class="col-3 p-0 p-md-2">
+                                                <input type="text" class="form-control d-inline-block btn-white-blue m-0 w-100" data-answer="${textData[keys[i+5]]}"></input>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>`)
+            // $('.story').children(':first-child').append(`
+            // <div class="row mb-2">
+            //     <div class="col-9 pe-1 pe-md-2">
+            //         <div class="english-479">${keys[i].split('(')[0].trim()} <i class="fas fa-volume-up volume-blue"></i></div>
+            //         <div class="french-479" style="${keys[i].split('(').length > 1 ? '' : 'color: transparent;'}">${keys[i].split('(').length > 1 ? '(' + keys[i].split('(')[1].trim() : 'placeholder'}</div>
+            //     </div>
+            //     <div class="col-3 p-0 p-md-2">
+            //         <input type="text" class="form-control d-inline-block btn-white-blue m-0 w-100" data-answer="${textData[keys[i]]}"></input>
+            //     </div>
+            // </div>`)
         }
-        for (let i = 5; i < 10; i++) {
-            $('.story').children(':nth-child(2)').append(`
-            <div class="row mb-2">
-                <div class="col-9 pe-1 pe-md-2">
-                    <div class="english-479">${keys[i].split('(')[0].trim()} <i class="fas fa-volume-up volume-blue"></i></div>
-                    <div class="french-479">${keys[i].split('(').length > 1 ? '(' + keys[i].split('(')[1].trim() : ''}</div>
-                </div>
-                <div class="col-3 p-0 p-md-2">
-                    <input type="text" class="form-control d-inline-block btn-white-blue m-0 w-100" data-answer="${textData[keys[i]]}"></input>
-                </div>
-            </div>`)
-        }
+        // for (let i = 5; i < 10; i++) {
+        //     $('.story').children(':nth-child(2)').append(`
+        //     <div class="row mb-2">
+        //         <div class="col-9 pe-1 pe-md-2">
+        //             <div class="english-479">${keys[i].split('(')[0].trim()} <i class="fas fa-volume-up volume-blue"></i></div>
+        //             <div class="french-479">${keys[i].split('(').length > 1 ? '(' + keys[i].split('(')[1].trim() : ''}</div>
+        //         </div>
+        //         <div class="col-3 p-0 p-md-2">
+        //             <input type="text" class="form-control d-inline-block btn-white-blue m-0 w-100" data-answer="${textData[keys[i]]}"></input>
+        //         </div>
+        //     </div>`)
+        // }
         $('.volume-blue').on('click', function() {
             playSound(`./audio/pronouns/story/${localStorage.getItem('age')}/${localStorage.getItem('activity')}/${$(this).parent().text().toLowerCase().trim().replace(/[^a-zA-Z\s]/g, '').replaceAll(' ', '_')}.mp3`);
         });
@@ -211,7 +235,7 @@ $(document).ready(async function () {
         if (data[localStorage.getItem('age')][localStorage.getItem('activity')].length > 0) {
             setTimeout(() => {
                 $('.story').children(':first-child').empty();
-                $('.story').children(':nth-child(2)').empty();
+                // $('.story').children(':nth-child(2)').empty();
                 $('button:contains("check")').attr('disabled', 'disabled');
                 render();
                 $('.story input').on('input', checkValue);
