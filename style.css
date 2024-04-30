@@ -366,14 +366,25 @@ figure {
 
 .secret-code-card {
   width: fit-content;
-  min-width: 75px;
+  min-width: 100px;
   min-height: 125px;
   /* margin-right: 10px; */
 }
 
+#countdown {
+  margin-bottom: 0px;
+  font-size: 1.5em;
+  color: red;
+}
 @media only screen and (max-width: 800px) {
   .secret-code-card {
     min-height: 100px;
+  }
+}
+
+@media only screen and (max-width: 1100px) {
+  .secret-code-card {
+    min-width: 75px;
   }
 }
 
@@ -481,7 +492,7 @@ figure {
 
 .english-479 {
   font-weight: bold;
-  font-size: max(min(1.2vw, 18px), 10px);
+  font-size: max(min(1.2vw, 16px), 10px);
 }
 
 .french-479 {
@@ -544,6 +555,14 @@ figure {
   .story-game .container-right {
     width: 70%;
   }
+
+  .secret-code-game.older-age-group .container-left {
+    width: 35%;
+  }
+
+  .secret-code-game.older-age-group .container-right {
+    width: 65%;
+  }
 }
 
 
@@ -590,9 +609,10 @@ figure {
 }
 
 .bottom-english-31012 .form-control {
-  width: 3vw;
-  min-width: 25px;
-  font-size: max(min(1.2vw, 15px), 10px);
+  width: 3.5vw;
+  min-width: 30px;
+  font-size: max(min(1.2vw, 13px), 9px);
+  /* font-size: max(min(1.2vw, 15px), 10px); */
   font-weight: bold;
   margin: auto;
   padding: 0;

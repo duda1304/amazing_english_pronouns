@@ -10,9 +10,9 @@ $(document).ready(function () {
             'you' : 4,
             'he' : 5,
             'she' : 7,
-            'it' : 11,
+            'it' : 9,
             'we' : 4,
-            'they' : 2
+            'they' : 4
         }
         folder = '1_3';
     } else {
@@ -22,13 +22,15 @@ $(document).ready(function () {
             'he' : 5,
             'she' : 5,
             'it' : 10,
-            'we' : 7,
-            'they' : 2
+            'we' : 6,
+            'they' : 3
         }
         folder = '2_1';
     }
 
-    const possibleAnswersBoolean = ['correct', 'incorrect'];
+    // const possibleAnswersBoolean = ['correct', 'incorrect'];
+    // TEMP
+    const possibleAnswersBoolean = ['correct', 'correct'];
 
     function imageFileNames(pronouns, number_of_images) {
         let fileNames = [];
@@ -92,6 +94,11 @@ $(document).ready(function () {
     render();
    
     function checkAnswer(event) {
+        // TEMP
+        if (images.length > 0) {
+            render();
+        }
+        return;
         $this = event.currentTarget;
         $(this).next().off('click', checkAnswer);
         if ($(this).data('answer') === correct_incorrect) {
@@ -114,6 +121,34 @@ $(document).ready(function () {
 
     $('div[data-answer="correct"], div[data-answer="incorrect"]').on('click', checkAnswer);
    
+    let sizes;
+
+    if (localStorage.getItem('age') == '1') {
+        sizes = {
+            'it_1' : '70%',
+            'it_2' : '50%',
+            'it_3' : '50%',
+            'it_4' : '80%',
+            'it_5' : '60%',
+            'it_6' : '60%',
+            'it_7' : '70%',
+            'it_8' : '50%',
+            'it_9' : '30%',
+        }
+    } else {
+        sizes = {
+            'it_1' : '60%',
+            'it_2' : '70%',
+            'it_3' : '80%',
+            'it_4' : '50%',
+            'it_5' : '70%',
+            'it_6' : '70%',
+            'it_7' : '60%',
+            'it_8' : '50%',
+            'it_9' : '70%',
+            'it_10' : '70%'
+        }
+    }
     $(".container-right img").on('load', function() {
         console.log("sdsa");
         const width = this.naturalWidth;
@@ -127,24 +162,6 @@ $(document).ready(function () {
             this.style.marginLeft = "10px";
         }
         
-       
-        else if (height/width >= 1.5) {
-            this.style.height = "90%";
-
-        } else if (height === width) {
-            this.style.height = "40%";
-        } else {
-            if (width/height >= 1.5) {
-                this.style.height = "40%";
-            } else if (width/height >= 1.2) {
-                this.style.height = "60%";
-            } else {
-                this.style.height = "90%";
-                // this.style.marginLeft = "20%";
-                this.style.marginTop = "20%";
-            }
-        }
-
         if (this.src.includes('you_') || this.src.includes('they_') || this.src.includes('we_')) {
             console.log("mistake")
             $('.rounded-circle')[0].style.left = "40%";
@@ -154,8 +171,14 @@ $(document).ready(function () {
             this.style.height = "80%";
         } 
 
-        if (this.src.includes('it_4') || this.src.includes('it_5')) {
-            this.style.height = "60%";
+        if (localStorage.getItem('age') == '1' && (this.src.includes('they_3') || this.src.includes('they_4'))) {
+            this.style.height = '50%';
+            this.style.marginLeft = "0%";
+            this.style.marginTop = "20%";
+        }
+ 
+        if (this.src.includes('it_')) {
+            this.style.height = sizes[this.src.split('/')[this.src.split('/').length -1].split('.')[0]];
             this.style.marginLeft = "0%";
             this.style.marginTop = "20%";
         }

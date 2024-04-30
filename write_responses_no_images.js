@@ -78,7 +78,7 @@ $(document).ready(async function () {
                     'the armchair (le fauteuil)': 'it',
                     'his cousins and you (ses cousins et toi)': 'you',
                     'Chloe’s mother (la mère de Chloe)': 'she',
-                    'their twin sister (sa soeur jumelle)': 'she',
+                    'her twin sister (sa soeur jumelle)': 'she',
                     'her nephew (son neveu)': 'he'
                 },
                 {

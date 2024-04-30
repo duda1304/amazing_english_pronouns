@@ -130,10 +130,13 @@ $(document).ready(function () {
        });
        const codeLength = parseInt(localStorage.getItem('age'));
        for (let i = 1; i <= codeLength; i++) {
+        // $('.secret-code').next().append(`
+        // <div class="col-4 d-flex justify-content-center">
+        //     <input type="text" class="btn-379 btn-white-green" disabled>
+        // </div>`);
         $('.secret-code').next().append(`
-        <div class="col-4 d-flex justify-content-center">
-            <input type="text" class="btn-379 btn-white-green" disabled>
-        </div>`);
+            <input type="text" class="btn-379 btn-white-green me-2 me-xl-3" disabled>
+        `);
        };
     }
 
@@ -152,11 +155,41 @@ $(document).ready(function () {
             arraysLength = 4;
             proposalCount = 4;
         }
+        
         compiledPages = compilePages(parseInt(localStorage.getItem('age')), proposalCount);
         correctLength = checkLengths(compiledPages, arraysLength);
     }
 
     render();
+   
+    let countdownInterval;
+    // IF OLDEST AGE GROUP ADD TIMER COUNTDOWN
+    if (localStorage.getItem('age') == '3') {
+        $('#proposed_answer').append(`<p id="countdown"></p>`);
+        let i = 0;
+        countdownInterval = setInterval(function() {
+            const countdownFinalValue = 60;
+            const timeRemaining = countdownFinalValue - i;
+        
+            // Display the countdown in the HTML element
+        
+            if (timeRemaining < 0) {
+                clearInterval(countdownInterval);
+                $('.proposed_part_of_code').off('click', handleClick);
+                if (compiledPages.length > 0 || (compiledPages.length === 0 && $('.incorrect').length !== 0)) {
+                    $('.modal-body').text('Please try again');
+                    $('.modal').modal('show');
+                } else if (compiledPages.length === 0 && $('.correct').length === $('input').length) {
+                    $('.modal-body').text('Nice job!');
+                    $('.modal').modal('show');
+                }
+            } else {
+                $('#countdown').text(timeRemaining);
+                i += 1;
+            }
+        }, 1000); 
+    }
+
    
     $('.proposed_part_of_code').on('click', handleClick);
 
@@ -193,19 +226,60 @@ $(document).ready(function () {
             }
         });
 
-        if (compiledPages.length > 0) {
-            setTimeout(() => {
-                $('input:text').removeClass('correct animate__animated animate__bounce animate__slow incorrect animate__animated animate__shakeX');
-                $('input:text').val('');
-                $('.proposed_part_of_code').removeData('selected');
-                $('.secret-code-cards').empty();
-                $('.secret-code').next().empty();
-                allNumbersArray = [1,2,3,4,5,6,7,8,9];
-                codeArray = [];
-                render();
-                setImageSizes();
-                $('.proposed_part_of_code').on('click', handleClick);
-            }, 2000);
+        function setNext() {
+            $('input:text').removeClass('correct animate__animated animate__bounce animate__slow incorrect animate__animated animate__shakeX');
+            $('input:text').val('');
+            $('.proposed_part_of_code').removeData('selected');
+            $('.secret-code-cards').empty();
+            $('.secret-code').next().empty();
+            allNumbersArray = [1,2,3,4,5,6,7,8,9];
+            codeArray = [];
+            render();
+            setImageSizes();
+            $('.proposed_part_of_code').on('click', handleClick);
+        }
+
+        if (localStorage.getItem('age') == '3') {
+            if (parseInt($('#countdown').text()) !== 0) {
+                if (compiledPages.length > 0) {
+                    if ($('.incorrect').length !== 0) {
+                        setTimeout(() => {
+                            $('input:text').removeClass('correct animate__animated animate__bounce animate__slow incorrect animate__animated animate__shakeX');
+                            $('input:text').val('');
+                            $('.proposed_part_of_code').removeData('selected');
+                            $('.proposed_part_of_code').on('click', handleClick);
+                        }, 2000);
+                    } else {
+                        setTimeout(() => {
+                            setNext()
+                        }, 2000);
+                    }
+                } else {
+                    if ($('.incorrect').length !== 0) {
+                        clearInterval(countdownInterval);
+                        $('.modal-body').text('Please try again');
+                        $('.modal').modal('show');
+                    } else {
+                        clearInterval(countdownInterval);
+                        $('.modal-body').text('Nice job!');
+                        $('.modal').modal('show');
+                    }
+                }
+            } else {
+                if (compiledPages.length > 0 || (compiledPages.length === 0 && $('.incorrect').length !== 0)) {
+                    $('.modal-body').text('Please try again');
+                    $('.modal').modal('show');
+                } else if (compiledPages.length === 0 && $('.incorrect').length === 0) {
+                    $('.modal-body').text('Nice job!');
+                    $('.modal').modal('show');
+                }
+            }
+        } else {
+            if (compiledPages.length > 0) {
+                setTimeout(() => {
+                    setNext()
+                }, 2000);
+            }
         }
     }
 
@@ -225,15 +299,16 @@ $(document).ready(function () {
             'it_2' : '70%',
             'it_3' : '50%',
             'it_4' : '60%',
-            'it_5' : '50%',
+            'it_5' : '30%',
             'it_6' : '60%',
             'it_7' : '60%',
             'it_8' : '40%',
             'it_9' : '50%',
-            'it_10' : '50%',
+            'it_10' : '40%',
             'it_11' : '50%',
             'it_12' : '50%',
         }
+        $('.secret-code-game').addClass('older-age-group');
     }
 
     function setImageSizes() {
@@ -258,6 +333,7 @@ $(document).ready(function () {
 
     setImageSizes();
   
+
    
 });
 

@@ -78,6 +78,9 @@ $(document).ready(function () {
     render();
    
     $('#proposed_answers>div').on('click', function() {
+        // TEMP for review
+        render();
+        return;
         tryCount += 1;
         if ($(this).text().toLowerCase() === correctAnswer) {
             $(this).addClass('correct animate__animated animate__bounce animate__slow');
@@ -113,6 +116,11 @@ $(document).ready(function () {
         }
     });
   
+   const sizes = {
+    'it_1' : '50%',
+    'it_2' : '40%',
+    'it_3' : '50%'
+   }
     $(".container-right img").on('load', function() {
         const width = this.naturalWidth;
         const height = this.naturalHeight;
@@ -125,13 +133,16 @@ $(document).ready(function () {
             if (width/height >= 1.5) {
                 this.style.height = "40%";
             } 
-            // else if (width/height >= 1.2) {
-            //     this.style.height = "60%";
-            // } 
             else {
                 this.style.height = "80%";
             }
         }
+
+        if (this.src.includes('it_')) {
+            this.style.height = sizes[this.src.split('/')[this.src.split('/').length -1].split('.')[0]];
+        }
+
+
     });
 
 });

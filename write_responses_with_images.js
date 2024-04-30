@@ -167,7 +167,7 @@ $(document).ready(async function () {
                 {
                     'en' : '$input are very lucky to be able to study here.',
                     'fr' : 'Nous sommes très chanceux de pouvoir étudier ici.',
-                    'answer': 'they'
+                    'answer': 'we'
                 }
             ]
         },
@@ -344,7 +344,10 @@ $(document).ready(async function () {
         });
 
         $('button:contains("listen")').removeAttr('disabled');
-        $('button:contains("next")').show();
+        if (data.length > 0) {
+            $('button:contains("next")').show();
+        }
+       
         $('button:contains("check")').hide();
     }
 
