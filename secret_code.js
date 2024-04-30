@@ -255,27 +255,6 @@ $(document).ready(function () {
     }
 
     $('#proposed_answer > div').css('text-transform', 'capitalize');
-    
-    // function setImageSizes() {
-    //     $(".container-right img").on('load', function() {
-    //         const width = this.naturalWidth;
-    //         const height = this.naturalHeight;
-        
-    //         if (height/width >= 1.5) {
-    //             this.style.height = "90%";
-    //         } else if (height === width) {
-    //             this.style.height = "40%";
-    //         } else {
-    //             if (width/height >= 1.5) {
-    //                 this.style.height = "40%";
-    //             } else if (width/height >= 1.2) {
-    //                 this.style.height = "60%";
-    //             } else {
-    //                 this.style.height = "80%";
-    //             }
-    //         }
-    //     });
-    // }
 
     setImageSizes();
   

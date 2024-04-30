@@ -51,6 +51,7 @@ body {
 .card-landing {
   width: 18rem;
   margin: 0 10px;
+  cursor: pointer;
 }
 
 .card-landing img {
@@ -102,7 +103,8 @@ body {
 
 .memory-card.flipped small {
   /* font-size: max(min(1vw, 8px), 8px); */
-  font-size: 1vw;
+  /* font-size: 1vw; */
+  font-size: 0.8vw;
 }
 
 .card-image {
@@ -148,6 +150,7 @@ body {
   /* height: 70%; */
   overflow: hidden;
   padding-left: 2%;
+  cursor: pointer;
 }
 
 .container-left img {
@@ -473,6 +476,7 @@ figure {
 
 .volume-blue {
   color: #5A9DE9;
+  cursor: pointer;
 }
 
 .english-479 {
