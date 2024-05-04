@@ -107,4 +107,12 @@ $(document).ready(async function () {
 		$("audio").attr("src", src);
 		$("audio")[0].play();
 	}
+
+	if ($('#initial_instructions').length !== 0 && !sessionStorage.getItem('initial-view')) {
+		$('#initial_instructions').modal('show');
+		sessionStorage.setItem('initial-view', true);
+		$('#hidden-button').on('click', function() {
+			$('#initial_instructions').modal('hide');
+		})
+	}
 });
