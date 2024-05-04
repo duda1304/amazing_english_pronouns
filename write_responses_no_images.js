@@ -73,7 +73,7 @@ $(document).ready(async function () {
                     'the father of her friend (le père de son ami)': 'he',
                     'the grandmother (la grand-mère)': 'she',
                     'his stepbrother (son demi-frère)': 'he',
-                    'my English teacher and you (mon professeur d’anglais et moi)': 'you',
+                    'my English teacher and you (mon professeur d’anglais et toi)': 'you',
                     'the neighbours and I (les voisins et moi)': 'we',
                     'the armchair (le fauteuil)': 'it',
                     'his cousins and you (ses cousins et toi)': 'you',
