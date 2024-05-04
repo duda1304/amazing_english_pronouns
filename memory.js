@@ -17,7 +17,7 @@ $(document).ready(function () {
 		'you_1' : 'tu',
 		'he_1' : 'il',
 		'she_1' : 'elle',
-		'it_1' : '<small>choses et animaux</small>',
+		'it_1' : '<small>Choses <br>et animaux</small>',
 		'we_1' : 'nous',
 		'you_2' : 'vous',
 		'they_1' : 'ils',

@@ -103,8 +103,7 @@ body {
 
 .memory-card.flipped small {
   /* font-size: max(min(1vw, 8px), 8px); */
-  /* font-size: 1vw; */
-  font-size: 0.8vw;
+  font-size: 1vw;
 }
 
 .card-image {
