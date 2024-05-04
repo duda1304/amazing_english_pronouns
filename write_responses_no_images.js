@@ -109,9 +109,6 @@ $(document).ready(async function () {
         }
     }
    
-    // 'my teacher’s sister (la soeur de mon professeur)': 'she', no audio
-   
-
     function playSound(src) {
 		if ($('audio').length === 0) {
 			$('main').append('<audio type="audio/mpeg"></audio>');
@@ -123,11 +120,25 @@ $(document).ready(async function () {
 		$('audio')[0].play();
 	}
 
+    const all_pages_data = data[localStorage.getItem('age')][localStorage.getItem('activity')];
+    let currentPage = 1;
+    let previousAnswers = [{}, {}, {}, {}];
+    
     function render() {
-        let textData = data[localStorage.getItem('age')][localStorage.getItem('activity')].shift();
+        if (currentPage === all_pages_data.length) {
+            $('button:contains("next")').attr('disabled', 'disabled');
+        } else if (currentPage === 1) {
+            $('button:contains("previous")').attr('disabled', 'disabled');
+        } else {
+            $('button:contains("next")').removeAttr('disabled');
+            $('button:contains("previous")').removeAttr('disabled');
+        }
+
+        let textData = all_pages_data[currentPage -1];
+        // let textData = data[localStorage.getItem('age')][localStorage.getItem('activity')].shift();
         let keys = Object.keys(textData);
         for (let i = 0; i < 5; i++) {
-            $('.story').children(':first-child').append(`<div class="row mb-2 p-0">
+            $('.story').children(':first-child').append(`<div class="row mb-2 p-0 w-100">
                                     <div class="col-6">
                                         <div class="row">
                                             <div class="col-9 pe-1 pe-md-2">
@@ -135,7 +146,7 @@ $(document).ready(async function () {
                                                 <div class="french-479" style="${keys[i].split('(').length > 1 ? '' : 'color: transparent;'}">${keys[i].split('(').length > 1 ? '(' + keys[i].split('(')[1].trim() : 'placeholder'}</div>
                                             </div>
                                             <div class="col-3 p-0 p-md-2">
-                                                <input type="text" class="form-control d-inline-block btn-white-blue m-0 w-100" data-answer="${textData[keys[i]]}"></input>
+                                                <input type="text" class="form-control d-inline-block btn-white-blue m-0 w-100" value="${previousAnswers[currentPage - 1][i+1] ? previousAnswers[currentPage - 1][i+1] : ""}" data-key="${i+1}" data-answer="${textData[keys[i]]}"></input>
                                             </div>
                                         </div>
                                     </div>
@@ -146,34 +157,12 @@ $(document).ready(async function () {
                                                 <div class="french-479" style="${keys[i+5].split('(').length > 1 ? '' : 'color: transparent;'}">${keys[i+5].split('(').length > 1 ? '(' + keys[i+5].split('(')[1].trim() : 'placeholder'}</div>
                                             </div>
                                             <div class="col-3 p-0 p-md-2">
-                                                <input type="text" class="form-control d-inline-block btn-white-blue m-0 w-100" data-answer="${textData[keys[i+5]]}"></input>
+                                                <input type="text" class="form-control d-inline-block btn-white-blue m-0 w-100" value="${previousAnswers[currentPage - 1][i+6] ? previousAnswers[currentPage - 1][i+6] : ""}" data-key="${i+6}" data-answer="${textData[keys[i+5]]}"></input>
                                             </div>
                                         </div>
                                     </div>
                                 </div>`)
-            // $('.story').children(':first-child').append(`
-            // <div class="row mb-2">
-            //     <div class="col-9 pe-1 pe-md-2">
-            //         <div class="english-479">${keys[i].split('(')[0].trim()} <i class="fas fa-volume-up volume-blue"></i></div>
-            //         <div class="french-479" style="${keys[i].split('(').length > 1 ? '' : 'color: transparent;'}">${keys[i].split('(').length > 1 ? '(' + keys[i].split('(')[1].trim() : 'placeholder'}</div>
-            //     </div>
-            //     <div class="col-3 p-0 p-md-2">
-            //         <input type="text" class="form-control d-inline-block btn-white-blue m-0 w-100" data-answer="${textData[keys[i]]}"></input>
-            //     </div>
-            // </div>`)
         }
-        // for (let i = 5; i < 10; i++) {
-        //     $('.story').children(':nth-child(2)').append(`
-        //     <div class="row mb-2">
-        //         <div class="col-9 pe-1 pe-md-2">
-        //             <div class="english-479">${keys[i].split('(')[0].trim()} <i class="fas fa-volume-up volume-blue"></i></div>
-        //             <div class="french-479">${keys[i].split('(').length > 1 ? '(' + keys[i].split('(')[1].trim() : ''}</div>
-        //         </div>
-        //         <div class="col-3 p-0 p-md-2">
-        //             <input type="text" class="form-control d-inline-block btn-white-blue m-0 w-100" data-answer="${textData[keys[i]]}"></input>
-        //         </div>
-        //     </div>`)
-        // }
         $('.volume-blue').on('click', function() {
             playSound(`./audio/pronouns/story/${localStorage.getItem('age')}/${localStorage.getItem('activity')}/${$(this).parent().text().toLowerCase().trim().replace(/[^a-zA-Z\s]/g, '').replaceAll(' ', '_')}.mp3`);
         });
@@ -194,11 +183,13 @@ $(document).ready(async function () {
         let sanitizedValue = $(this).val().replace(/[^A-Za-z]/g, '');
         sanitizedValue = sanitizedValue.substring(0, 4);
         $(this).val(sanitizedValue);
+        previousAnswers[currentPage - 1][$(this).data('key')] = sanitizedValue;
         if (checkIfAllFilled() === true) {
             $('button:contains("check")').removeAttr('disabled');
         } else {
             $('button:contains("check")').attr('disabled', 'disabled');
         }
+        console.log(previousAnswers);
     }
 
     /// CHANGED TO IF 8 out of 10 FILLED
@@ -221,6 +212,24 @@ $(document).ready(async function () {
 		checkResponses();
 	});
 
+    
+    
+    $('button:contains("next"), button:contains("previous")').on('click', function() {
+        if ($(this).text().includes('next') && currentPage < all_pages_data.length) {
+            $('.story').children(':first-child').empty();
+            $('button:contains("check")').attr('disabled', 'disabled');
+            currentPage += 1;
+            render();
+            $('.story input').on('input', checkValue);
+        } else if ($(this).text().includes('previous') && currentPage > 1) {
+            $('.story').children(':first-child').empty();
+            $('button:contains("check")').attr('disabled', 'disabled');
+            currentPage -= 1;
+            render();
+            $('.story input').on('input', checkValue);
+        }
+    })
+
     function checkResponses() {
         console.log("check responses");
         $('.story input').attr('disabled', true);
@@ -232,11 +241,12 @@ $(document).ready(async function () {
             }
         });
 
-        if (data[localStorage.getItem('age')][localStorage.getItem('activity')].length > 0) {
+        // if (data[localStorage.getItem('age')][localStorage.getItem('activity')].length > 0) {
+        if (currentPage < all_pages_data.length) {
             setTimeout(() => {
                 $('.story').children(':first-child').empty();
-                // $('.story').children(':nth-child(2)').empty();
                 $('button:contains("check")').attr('disabled', 'disabled');
+                currentPage += 1;
                 render();
                 $('.story input').on('input', checkValue);
             }, 2000);

@@ -143,7 +143,7 @@ body {
 
 .container-left {
   float: left;
-  width: 40%;
+  width: 35%;
   margin-top: 10%;
   /* margin-bottom: 20vh; */
   /* height: 70%; */
@@ -199,7 +199,7 @@ body {
 
 .container-right {
   float: right;
-  width: 60%;
+  width: 65%;
   margin-top: 10%;
   overflow: hidden;
   padding-right: 2%;
@@ -365,9 +365,14 @@ figure {
 
 .secret-code-card {
   width: fit-content;
-  min-width: 100px;
+  /* min-width: 100px; */
+  min-width: 100%;
   min-height: 125px;
   /* margin-right: 10px; */
+}
+
+.secret-code-card.first-age-group {
+  min-width: 125px;
 }
 
 #countdown {
@@ -384,6 +389,9 @@ figure {
 @media only screen and (max-width: 1100px) {
   .secret-code-card {
     min-width: 75px;
+  }
+  .secret-code-card.first-age-group {
+    min-width: 85px;
   }
 }
 
@@ -491,12 +499,14 @@ figure {
 
 .english-479 {
   font-weight: bold;
-  font-size: max(min(1.2vw, 16px), 10px);
+  /* font-size: max(min(1.2vw, 16px), 10px); */
+  font-size: max(min(1.3vw, 17px), 11px);
 }
 
 .french-479 {
   font-style: italic;
-  font-size: max(min(1.0vw, 16px), 9px);
+  /* font-size: max(min(1.0vw, 16px), 9px); */
+  font-size: max(min(1.1vw, 17px), 10px);
 }
 
 /* activity 3 (10 -12) */
@@ -520,7 +530,7 @@ figure {
   border-radius: 8% 8% 0% 0%;
   overflow: hidden;
   min-height: 165px;
-  height: 30vh;
+  height: 35vh;
 }
 
 @media only screen and (max-width: 940px) {

@@ -15,6 +15,8 @@ $(document).ready(function () {
             'they' : 4
         };
         dir = '2_3';
+        $('.instruction-en').html($('.instruction-en').html().replace(' Attention! You have one minute to find the ten correct secret codes.', ''))
+        $('.instruction-fr').html($('.instruction-fr').html().replace(' Attention ! Tu as une minute pour trouver les dix bons codes secrets.', ''))
     } else {
         number_of_images = {
             'i' : 3,
@@ -122,7 +124,7 @@ $(document).ready(function () {
             
             $('.secret-code-cards').append(`
             <div class="align-items-center d-flex flex-column p-0 m-1 m-md-2" style="width: fit-content;">
-                <div class="secret-code-card d-flex justify-content-center align-items-center p-1 p-md-2">
+                <div class="secret-code-card d-flex justify-content-center align-items-center p-1 p-md-2 ${localStorage.getItem('age') == '2' ? "first-age-group" : ""}">
                     <img src="./media/${dir}/${element}" alt="Image" class="responsive-img">
                 </div>
                 <div class="btn-379 btn-white-red btn m-2 px-2 proposed_part_of_code">${randomNumber}</div>
@@ -165,33 +167,58 @@ $(document).ready(function () {
     let countdownInterval;
     // IF OLDEST AGE GROUP ADD TIMER COUNTDOWN
     if (localStorage.getItem('age') == '3') {
-        $('#proposed_answer').append(`<p id="countdown"></p>`);
+        $('#proposed_answer').append(`<p id="countdown">60</p>`);
         let i = 0;
-        countdownInterval = setInterval(function() {
-            const countdownFinalValue = 60;
-            const timeRemaining = countdownFinalValue - i;
-        
-            // Display the countdown in the HTML element
-        
-            if (timeRemaining < 0) {
-                clearInterval(countdownInterval);
-                $('.proposed_part_of_code').off('click', handleClick);
-                if (compiledPages.length > 0 || (compiledPages.length === 0 && $('.incorrect').length !== 0)) {
-                    $('.modal-body').text('Please try again');
-                    $('.modal').modal('show');
-                } else if (compiledPages.length === 0 && $('.correct').length === $('input').length) {
-                    $('.modal-body').text('Nice job!');
-                    $('.modal').modal('show');
+        // function startTimer() {
+        //     countdownInterval = setInterval(function() {
+        //         const countdownFinalValue = 60;
+        //         const timeRemaining = countdownFinalValue - i;
+            
+        //         if (timeRemaining < 0) {
+        //             clearInterval(countdownInterval);
+        //             $('.proposed_part_of_code').off('click', handleClick);
+        //             if (compiledPages.length > 0 || (compiledPages.length === 0 && $('.incorrect').length !== 0)) {
+        //                 $('.modal-body').text('Please try again');
+        //                 $('.modal').modal('show');
+        //             } else if (compiledPages.length === 0 && $('.correct').length === $('input').length) {
+        //                 $('.modal-body').text('Nice job!');
+        //                 $('.modal').modal('show');
+        //             }
+        //         } else {
+        //             $('#countdown').text(timeRemaining);
+        //             i += 1;
+        //         }
+        //     }, 1000); 
+        // }
+        $('[class*="navigation"]').append(`<button type="button" class="btn-blue btn m-1 m-xl-2">start</button>`);
+        $('button:contains("start")').on('click', function() {
+            $(this).attr('disabled', 'disabled');
+            countdownInterval = setInterval(function() {
+                const countdownFinalValue = 59;
+                const timeRemaining = countdownFinalValue - i;
+            
+                if (timeRemaining < 0) {
+                    clearInterval(countdownInterval);
+                    $('.proposed_part_of_code').off('click', handleClick);
+                    if (compiledPages.length > 0 || (compiledPages.length === 0 && $('.incorrect').length !== 0)) {
+                        $('.modal-body').text('Please try again');
+                        $('.modal').modal('show');
+                    } else if (compiledPages.length === 0 && $('.correct').length === $('input').length) {
+                        $('.modal-body').text('Nice job!');
+                        $('.modal').modal('show');
+                    }
+                } else {
+                    $('#countdown').text(timeRemaining);
+                    i += 1;
                 }
-            } else {
-                $('#countdown').text(timeRemaining);
-                i += 1;
-            }
-        }, 1000); 
+            }, 1000); 
+        })
     }
 
-   
     $('.proposed_part_of_code').on('click', handleClick);
+    $('.proposed_part_of_code').prev().on('click', function() {
+        $(this).next().click();
+    })
 
     function handleClick(e) {
         $this = e.currentTarget;
@@ -237,6 +264,9 @@ $(document).ready(function () {
             render();
             setImageSizes();
             $('.proposed_part_of_code').on('click', handleClick);
+            $('.proposed_part_of_code').prev().on('click', function() {
+                $(this).next().click();
+            })
         }
 
         if (localStorage.getItem('age') == '3') {
@@ -248,6 +278,9 @@ $(document).ready(function () {
                             $('input:text').val('');
                             $('.proposed_part_of_code').removeData('selected');
                             $('.proposed_part_of_code').on('click', handleClick);
+                            $('.proposed_part_of_code').prev().on('click', function() {
+                                $(this).next().click();
+                            })
                         }, 2000);
                     } else {
                         setTimeout(() => {

@@ -348,7 +348,7 @@ $(document).ready(async function () {
             $('button:contains("next")').show();
         }
        
-        $('button:contains("check")').hide();
+        $('button:contains("check")').attr('disabled', 'disabled');
     }
 
     function renderNext() {
