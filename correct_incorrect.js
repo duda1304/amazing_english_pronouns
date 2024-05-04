@@ -171,6 +171,10 @@ $(document).ready(function () {
             this.style.height = "80%";
         } 
 
+        if (this.src.includes('they_3')) {
+            this.style.marginTop = "max(15%, 35px)";
+        }
+
         if (localStorage.getItem('age') == '1' && (this.src.includes('they_3') || this.src.includes('they_4'))) {
             this.style.height = '50%';
             this.style.marginLeft = "0%";
