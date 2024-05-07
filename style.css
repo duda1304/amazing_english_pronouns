@@ -29,10 +29,14 @@ body {
 /* } */
 
 /* landing page */
+.index-page img {
+  width: 80%;
+  object-fit: contain;
+}
 
 #hidden-button {
   position: absolute;
-  bottom: 5%;
+  bottom: 4%;
   left: 40%;
   width: 20%;
   height: 4%;
@@ -704,6 +708,10 @@ figure {
   main {
     display: block !important;
   }
+
+  main.index-page {
+    display: flex !important;
+  }
 }
 
 @media (orientation: portrait) {
@@ -713,11 +721,7 @@ figure {
     justify-content: center;
   }
 
-  main {
+  main, .index-page {
     display: none !important;
   }
-
-  /* #main {
-    background-image: url('./img/homescreen_portrait.png') !important;
-  } */
 }
