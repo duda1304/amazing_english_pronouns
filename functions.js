@@ -70,7 +70,7 @@ $(document).ready(async function () {
 		}
 	}
 	$('button:contains("activities")').on("click", function () {
-		window.location.href = "index.html";
+		window.location.href = "activities.html";
 	});
 
 	$(".card-landing").on("click", function (index, element) {
