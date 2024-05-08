@@ -166,6 +166,10 @@ $(document).ready(async function () {
         $('.volume-blue').on('click', function() {
             playSound(`./audio/pronouns/story/${localStorage.getItem('age')}/${localStorage.getItem('activity')}/${$(this).parent().text().toLowerCase().trim().replace(/[^a-zA-Z\s]/g, '').replaceAll(' ', '_')}.mp3`);
         });
+        $('.volume-blue').parent().on('click', function() {
+            playSound(`./audio/pronouns/story/${localStorage.getItem('age')}/${localStorage.getItem('activity')}/${$(this).text().toLowerCase().trim().replace(/[^a-zA-Z\s]/g, '').replaceAll(' ', '_')}.mp3`);
+        });
+        $('.volume-blue').parent().css('cursor', 'pointer');
     }
 
     render();
