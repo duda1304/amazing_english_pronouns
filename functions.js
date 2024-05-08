@@ -37,7 +37,7 @@ $(document).ready(async function () {
 	};
 	console.log(data);
 
-	if (window.location.href.includes("index.html")) {
+	if (window.location.href.includes("activities.html")) {
 		if (!localStorage.getItem("age")) {
 			$('.temp-buttons button[data-age="1"]').click();
 		} else {

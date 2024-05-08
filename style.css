@@ -390,6 +390,7 @@ figure {
   /* min-width: 100px; */
   min-width: 100%;
   min-height: 125px;
+  cursor: pointer;
   /* margin-right: 10px; */
 }
 
