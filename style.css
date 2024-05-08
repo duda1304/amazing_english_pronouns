@@ -326,6 +326,10 @@ figure {
 
 
 /* activity 04  */
+.drag-and-drop input {
+  text-transform: capitalize;
+}
+
 @media only screen and (max-width: 940px) {
   .drag-and-drop .container-left {
     width: 35%;
