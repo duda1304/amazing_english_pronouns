@@ -169,30 +169,11 @@ $(document).ready(function () {
     if (localStorage.getItem('age') == '3') {
         $('#proposed_answer').append(`<p id="countdown">60</p>`);
         let i = 0;
-        // function startTimer() {
-        //     countdownInterval = setInterval(function() {
-        //         const countdownFinalValue = 60;
-        //         const timeRemaining = countdownFinalValue - i;
-            
-        //         if (timeRemaining < 0) {
-        //             clearInterval(countdownInterval);
-        //             $('.proposed_part_of_code').off('click', handleClick);
-        //             if (compiledPages.length > 0 || (compiledPages.length === 0 && $('.incorrect').length !== 0)) {
-        //                 $('.modal-body').text('Please try again');
-        //                 $('.modal').modal('show');
-        //             } else if (compiledPages.length === 0 && $('.correct').length === $('input').length) {
-        //                 $('.modal-body').text('Nice job!');
-        //                 $('.modal').modal('show');
-        //             }
-        //         } else {
-        //             $('#countdown').text(timeRemaining);
-        //             i += 1;
-        //         }
-        //     }, 1000); 
-        // }
-        $('[class*="navigation"]').append(`<button type="button" class="btn-blue btn m-1 m-xl-2">start</button>`);
+        $('[class*="navigation"]').append(`<button type="button" class="btn-blue btn m-1 m-xl-2">start the timer</button>`);
         $('button:contains("start")').on('click', function() {
-            $(this).attr('disabled', 'disabled');
+            $('button:contains("start")').each(function() {
+                $(this).attr('disabled', 'disabled')
+            });
             countdownInterval = setInterval(function() {
                 const countdownFinalValue = 59;
                 const timeRemaining = countdownFinalValue - i;
@@ -221,6 +202,9 @@ $(document).ready(function () {
     })
 
     function handleClick(e) {
+        if (!$('button:contains("start")').attr('disabled')) {
+            return
+        }
         $this = e.currentTarget;
         $(this).off('click', handleClick);
         let emptyInputs = $('input:text').filter(function() {
