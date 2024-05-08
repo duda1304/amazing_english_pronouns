@@ -126,12 +126,12 @@ $(document).ready(async function () {
     
     function render() {
         if (currentPage === all_pages_data.length) {
-            $('button:contains("next")').attr('disabled', 'disabled');
+            $('button:contains("next")').hide();
         } else if (currentPage === 1) {
-            $('button:contains("previous")').attr('disabled', 'disabled');
+            $('button:contains("previous")').hide();
         } else {
-            $('button:contains("next")').removeAttr('disabled');
-            $('button:contains("previous")').removeAttr('disabled');
+            $('button:contains("next")').show();
+            $('button:contains("previous")').show();
         }
 
         let textData = all_pages_data[currentPage -1];
