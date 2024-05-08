@@ -32,13 +32,14 @@ body {
 .index-page img {
   width: 80%;
   object-fit: contain;
+  max-width: 600px;
 }
 
 #hidden-button {
   position: absolute;
   bottom: 4%;
-  left: 40%;
-  width: 20%;
+  left: 42%;
+  width: 15%;
   height: 4%;
   background-color: transparent;
   border: none;
