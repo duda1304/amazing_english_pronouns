@@ -85,7 +85,7 @@ $(document).ready(async function () {
                     'my boots (mes bottes)': 'they',
                     'the frame (le cadre)': 'it',
                     'my uncle (mon oncle)': 'he',
-                    'my teacher’s sister (la soeur de mon professeur)': 'she',
+                    'my sister’s teacher (le professeur de ma soeur)': 'she',
                     'the remote control (la télécommande)': 'it',
                     'my brother-in-law (mon beau-frère)': 'he',
                     'your children (tes enfants)': 'they',

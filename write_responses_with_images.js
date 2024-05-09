@@ -252,8 +252,11 @@ $(document).ready(async function () {
 		$('audio')[0].play();
 	}
 
+    let currentPage = 1;
+    let previousAnswers = {'1' : {}, '2' : {}, '3' : {}, '4' : {}, '5' : {}, '6' : {}, '7' : {}};
+   
     function render() {
-        const pageData = data.shift();
+        const pageData = data[currentPage -1];
         const identifier = Object.keys(pageData)[0];
         const textData = pageData[identifier];
 
@@ -266,7 +269,7 @@ $(document).ready(async function () {
                         <img src="./media/3_3/${identifier}_${i+1}.png" alt="Image">
                     </div>
                     <div class="bottom-text-31012 p-1 p-md-2">
-                        <p class="bottom-english-31012">${textData[i]['en'].replace('$input', `<input type="text" class="form-control d-inline-block" data-answer="${textData[i]['answer']}">`)}</p>
+                        <p class="bottom-english-31012">${textData[i]['en'].replace('$input', `<input type="text" class="form-control d-inline-block" data-index="${i+1}" value="${previousAnswers[currentPage][i+1] ? previousAnswers[currentPage][i+1] : ''}" data-answer="${textData[i]['answer']}">`)}</p>
                         <p class="bottom-french-31012">(${textData[i]['fr']})</p>
                     </div>
                 </div>
@@ -281,7 +284,7 @@ $(document).ready(async function () {
                         <img src="./media/3_3/${identifier}_${i+1}.png" alt="Image">
                     </div>
                     <div class="bottom-text-31012 p-1 p-md-2">
-                        <p class="bottom-english-31012">${textData[i]['en'].replace('$input', `<input type="text" class="form-control d-inline-block" data-answer="${textData[i]['answer']}">`)}</p>
+                        <p class="bottom-english-31012">${textData[i]['en'].replace('$input', `<input type="text" class="form-control d-inline-block" data-index="${i+1}" value="${previousAnswers[currentPage][i+1] ? previousAnswers[currentPage][i+1] : ''}" data-answer="${textData[i]['answer']}">`)}</p>
                         <p class="bottom-french-31012">(${textData[i]['fr']})</p>
                     </div>
                 </div>
@@ -330,8 +333,22 @@ $(document).ready(async function () {
 	});
 
     $('button:contains("next")').on('click', function() {
+        storePreviousAnswers();
+        currentPage += 1;
         renderNext();
     });
+
+    $('button:contains("previous")').on('click', function() {
+        storePreviousAnswers();
+        currentPage -= 1;
+        renderNext();
+    });
+
+    function storePreviousAnswers() {
+        $('.correct').each(function() {
+            previousAnswers[currentPage][$(this).data('index')] = $(this).val()
+        })
+    }
 
     function checkResponses() {
         $('.story input').attr('disabled', true);
@@ -344,27 +361,33 @@ $(document).ready(async function () {
         });
 
         $('button:contains("listen")').removeAttr('disabled');
-        if (data.length > 0) {
+        if (currentPage === data.length) {
+            $('button:contains("previous")').show()
+            $('button:contains("next")').hide();
+        } else if (currentPage === 1) {
             $('button:contains("next")').show();
+            $('button:contains("previous")').hide()
+        } else {
+            $('button:contains("next")').show();
+            $('button:contains("previous")').show();
         }
-       
         $('button:contains("check")').attr('disabled', 'disabled');
     }
 
     function renderNext() {
-        if (data.length > 0) {
-            $('.story').children(':first-child').empty();
-            $('.story').children(':nth-child(2)').empty();
-            $('button:contains("check")').show();
-            $('button:contains("check")').attr('disabled', 'disabled');
-            $('button:contains("listen")').attr('disabled', 'disabled');
-            $('button:contains("next")').hide();
-            if ($('audio').length !== 0) {
-                $('audio')[0].pause();
-            }
-            render();
-            $('.story input').on('input', checkValue);
+        $('.story').children(':first-child').empty();
+        $('.story').children(':nth-child(2)').empty();
+        $('button:contains("check")').show();
+        $('button:contains("check")').attr('disabled', 'disabled');
+        $('button:contains("listen")').attr('disabled', 'disabled');
+        $('button:contains("next")').hide();
+        $('button:contains("previous")').hide();
+        if ($('audio').length !== 0) {
+            $('audio')[0].pause();
         }
+        
+        render();
+        $('.story input').on('input', checkValue);
     }
 
 });

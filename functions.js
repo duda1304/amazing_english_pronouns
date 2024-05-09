@@ -35,7 +35,6 @@ $(document).ready(async function () {
 			activity4: "write_responses_no_images",
 		},
 	};
-	console.log(data);
 
 	if (window.location.href.includes("activities.html")) {
 		if (!localStorage.getItem("age")) {

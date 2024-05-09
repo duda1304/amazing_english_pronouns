@@ -584,6 +584,14 @@ figure {
     width: 30%;
   }
 
+  .story-game .navigation-s {
+      display: flex;
+  }
+  
+  .story-game .navigation-l {
+    display: none;
+  }
+
   .story-game .container-right {
     width: 70%;
   }
